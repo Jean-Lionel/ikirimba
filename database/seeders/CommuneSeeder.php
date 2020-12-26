@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Commune;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class CommuneSeeder extends Seeder
@@ -49,7 +50,9 @@ class CommuneSeeder extends Seeder
     		foreach ($communes as $key =>$name) {
     			$arrayCommunes[] = [
     				'name' => $name,
-    				'province_id' => $province_id  +1
+    				'province_id' => $province_id  +1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
 
     			];
     			

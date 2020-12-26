@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colline;
+
+use App\Models\Groupement;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
-class CollineController extends Controller
+class PersonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +16,8 @@ class CollineController extends Controller
      */
     public function index()
     {
-        //
-
-        return view('colines.index');
+        
+        return view('people.index');
     }
 
     /**
@@ -26,7 +27,7 @@ class CollineController extends Controller
      */
     public function create()
     {
-        //
+        return view('people.create');
     }
 
     /**
@@ -43,10 +44,10 @@ class CollineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function show(Colline $colline)
+    public function show(Person $person)
     {
         //
     }
@@ -54,10 +55,10 @@ class CollineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function edit(Colline $colline)
+    public function edit(Person $person)
     {
         //
     }
@@ -66,10 +67,10 @@ class CollineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Colline $colline)
+    public function update(Request $request, Person $person)
     {
         //
     }
@@ -77,10 +78,10 @@ class CollineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Colline $colline)
+    public function destroy(Person $person)
     {
         //
     }

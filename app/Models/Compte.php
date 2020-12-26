@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Groupement extends Model
+class Compte extends Model
 {
     use HasFactory;
+
     use SoftDeletes;
 
-    protected $fillable = ['name', 'colline_id'];
+    protected $guarded = [];
 
-    public function colline()
-    {
-    	return $this->belongsTo('App\Models\Colline','colline_id','id');
+
+    public function membre(){
+    	return $this->belongsTo('App\Models\Person','person_id','id');
     }
 }

@@ -1,0 +1,73 @@
+<div>
+    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
+  
+    <div class="row">
+    	<div class="col-md-4">
+    		  <h2>Liste des membres</h2>
+              <div><a href="{{ route('people.create') }}" class="btn btn-sm btn-block">Nouveau Membre</a></div>
+    	</div>
+    	<div class="col-md-8">
+    		<div class="row">
+    			<div class="col-md-3 col-sm-6">
+    				<label for="">Province</label>
+    				<select name="" id="" class="form-control form-control-sm">
+    					<option value="">Choisissez ....</option>
+
+    					@foreach($provinces as $province)
+    					<option value="{{ $province->id }}">{{ $province->name }}</option>
+
+    					@endforeach
+    				</select>
+    			</div>
+    			<div class="col-md-3 col-sm-6">
+    				<label for="">Commune</label>
+    				<select name="" id="" class="form-control form-control-sm"></select>
+    			</div>
+    			<div class="col-md-3 col-sm-6">
+    				<label for="">Colline</label>
+    				<select name="" id="" class="form-control form-control-sm"></select>
+    			</div>
+    			<div class="col-md-3 col-sm-6">
+    				<label for="">Groupement</label>
+    				<select name="" id="" class="form-control form-control-sm"></select>
+    			</div>
+    		</div>
+    		
+    	</div>
+
+    	<div class="col-md-12">
+    		<table class="table">
+    			<thead class="badge-dark">
+    				<tr>
+    					<th>#</th>
+    					<th>CODE</th>
+    					<th>NOM</th>
+    					<th>PRENOM</th>
+    					<th>TELEPHONE</th>
+    					<th>CNI</th>
+    					<th>COLINE</th>
+    					<th>GROUPEMENT</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				@foreach($persons as $person)
+
+    				<tr>
+    					<td>{{ $person->id }}</td>
+    					<td>{{ $person->compte->name ?? '' }}</td>
+    					<td>{{ $person->first_name }}</td>
+    					<td>{{ $person->last_name }}</td>
+    					<td>{{ $person->telephone }}</td>
+    					<td>{{ $person->cni }}</td>
+    					<td>{{ $person->groupement->colline->name ?? "" }}</td>
+    					<td>{{ $person->groupement->name ?? "" }}</td>
+    				
+    				</tr>
+
+
+    				@endforeach
+    			</tbody>
+    		</table>
+    	</div>
+    </div>
+</div>

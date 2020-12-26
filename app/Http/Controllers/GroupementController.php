@@ -15,6 +15,8 @@ class GroupementController extends Controller
     public function index()
     {
         //
+
+        return view('groupements.index');
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Colline;
+use App\Models\Compte;
 use Illuminate\Http\Request;
 
-class CollineController extends Controller
+class CompteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class CollineController extends Controller
     public function index()
     {
         //
-
-        return view('colines.index');
     }
 
     /**
@@ -43,10 +41,10 @@ class CollineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Compte  $compte
      * @return \Illuminate\Http\Response
      */
-    public function show(Colline $colline)
+    public function show(Compte $compte)
     {
         //
     }
@@ -54,10 +52,10 @@ class CollineController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Compte  $compte
      * @return \Illuminate\Http\Response
      */
-    public function edit(Colline $colline)
+    public function edit(Compte $compte)
     {
         //
     }
@@ -66,10 +64,10 @@ class CollineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Compte  $compte
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Colline $colline)
+    public function update(Request $request, Compte $compte)
     {
         //
     }
@@ -77,10 +75,10 @@ class CollineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Colline  $colline
+     * @param  \App\Models\Compte  $compte
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Colline $colline)
+    public function destroy(Compte $compte)
     {
         //
     }

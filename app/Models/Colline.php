@@ -10,6 +10,8 @@ class Colline extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'commune_id'];
+
     public function commune()
     {
     	return $this->belongsTo(Commune::class);
