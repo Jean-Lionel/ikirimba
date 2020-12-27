@@ -1,16 +1,18 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
+{{-- {{ $provinces->map->id }} --}}
+
   
     <div class="row">
     	<div class="col-md-4">
     		  <h2>Liste des membres</h2>
-              <div><a href="{{ route('people.create') }}" class="btn btn-sm btn-block">Nouveau Membre</a></div>
+              <div><a href="{{ route('people.create') }}" class="btn btn-sm btn-info btn-block">Nouveau Membre</a></div>
     	</div>
     	<div class="col-md-8">
     		<div class="row">
     			<div class="col-md-3 col-sm-6">
     				<label for="">Province</label>
-    				<select name="" id="" class="form-control form-control-sm">
+    				<select name="" wire:model="selectedProvince" id="" class="form-control form-control-sm">
     					<option value="">Choisissez ....</option>
 
     					@foreach($provinces as $province)
@@ -21,15 +23,36 @@
     			</div>
     			<div class="col-md-3 col-sm-6">
     				<label for="">Commune</label>
-    				<select name="" id="" class="form-control form-control-sm"></select>
-    			</div>
-    			<div class="col-md-3 col-sm-6">
-    				<label for="">Colline</label>
-    				<select name="" id="" class="form-control form-control-sm"></select>
-    			</div>
+    				<select name="" wire:model="selectCommune" id="" class="form-control form-control-sm">
+                        <option value="">Choisissez ....</option>
+                        @foreach($communes as $commune)
+                        <option value="{{ $commune->id }}">{{ $commune->name }}</option>
+
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="">Colinne</label>
+                    <select name="" id="" wire:model="selectColline" class="form-control form-control-sm">
+                        <option value="">Choisissez ici ....</option>
+                        @foreach($collines as $colline)
+                        <option value="{{ $colline->id }}">{{ $colline->name }}</option>
+
+                        @endforeach
+                    </select>
+                </div>
+    			
     			<div class="col-md-3 col-sm-6">
     				<label for="">Groupement</label>
-    				<select name="" id="" class="form-control form-control-sm"></select>
+    				<select name="" id="" wire:model="selectedGroupement" class="form-control form-control-sm">
+                        <option value="">Choisissez ici ....</option>
+                        @foreach($groupements as $groupement)
+                        <option value="{{ $groupement->id }}">{{ $groupement->name }}</option>
+
+                        @endforeach
+                        
+                    </select>
     			</div>
     		</div>
     		
@@ -66,8 +89,16 @@
 
 
     				@endforeach
+
+
     			</tbody>
     		</table>
+
+
+
+             <div style="height: 100px; width: 100%; overflow: hidden;">
+           {{ $persons->links() }}
+             </div>
     	</div>
     </div>
 </div>

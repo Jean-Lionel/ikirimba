@@ -115,6 +115,14 @@
 					<button type="submit" wire:click.prevent="store()" class="btn-info btn  btn-block">Enregistrer</button>
 				</div>
 
+
+				@if($membre != null)
+				<div class="badge-dark col-md-12">
+					{{$membre->first_name.' '. $membre->last_name }} : {{ $membre->compte->name }} 
+				</div>
+
+				@endif
+
 			</div>
 
 			@endif
