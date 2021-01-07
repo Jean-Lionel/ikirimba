@@ -19,8 +19,14 @@ class CreatePeopleTable extends Migration
             $table->string('last_name');
             $table->string('cni');
             $table->string('telephone');
+            
             $table->string('sexe');
             $table->string('etat_civil')->nullable();
+            //$table->string('unique_code')->unique();
+            $table->float('nombre_enfant_dirrect')->default(0);
+            $table->string('code_parrent')->nullable();
+            $table->double('montant')->nullable();
+
             $table->foreignId('groupement_id')->constrained();
             $table->timestamps();
             $table->softDeletes();

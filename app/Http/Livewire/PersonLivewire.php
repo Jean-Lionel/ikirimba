@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Adhesion;
 use App\Models\Colline;
 use App\Models\Commune;
 use App\Models\Compte;
@@ -31,6 +32,8 @@ class PersonLivewire extends Component
     public $telephone = "";
     public $cni = "";
     public $sexe = "";
+    public $montant = "";
+    public $parent_code = "";
 
 
     
@@ -43,6 +46,7 @@ class PersonLivewire extends Component
 
     public function mount()
     {
+        //dd(Person::where('unique_code','=', '')->first());
         $this->provinces = Province::all();
         $this->communes = collect();
         $this->collines = collect();
@@ -84,17 +88,31 @@ class PersonLivewire extends Component
  }
 
 
- public function store(){
-
-    $validatedDate = $this->validate([
+ protected $rules = [
 
         'first_name' => 'required',
         'last_name' => 'required',
         'telephone' => 'required',
         'cni' => 'required',
-          //  'groupement_id' => 
+        'montant' => 'required|numeric|min:15000|max:15000',
+        'parent_code' => 'required|exists:comptes,name',
 
-    ]);
+ ];
+
+protected $messages = [
+        'montant.min' => "Le montant d'adhésion est de 15000 FBU",
+        'montant.max' => "Le montant d'adhésion est invalide",
+        'parent_code.exists' => "Le compte est invalide"
+    ];
+
+ public function updatedMontant(){
+    $this->validateOnly($this->montant);
+ }
+
+
+ public function store(){
+
+    $this->validate();
 
     try {
 
@@ -106,6 +124,8 @@ class PersonLivewire extends Component
             'sexe' => $this->sexe,
             'telephone' => $this->telephone,
             'cni' => $this->cni,
+            'montant' => $this->montant,
+            'code_parrent' => 20//$this->getUniqueCode(),
             'groupement_id' => $this->selectedGroupement
 
         ]);
@@ -114,6 +134,10 @@ class PersonLivewire extends Component
             'name' => 'CODE-'.$personne->id,
             'montant' => 0,
             'person_id' =>  $personne->id
+
+        ]);
+
+        Adhesion::create([
 
         ]);
 
@@ -131,4 +155,35 @@ class PersonLivewire extends Component
 
 
 }
+
+   
+
+
+    private function sharedContribution(){
+
+        //Regarder Le parent 1D
+        //Regarder Le parent 5D
+        //Regarder Le parent 5D
+        //
+    }
+
+    private function checkNumberEnfant(){
+        
+        $compte = Compte::where('name','=',$this->parent_code)->firstOrFail();
+
+    }
+
+
+
+    private function getUniqueCode()
+    {
+        //Person::where('unique_code','=', '')->first()
+         $genKey = unique_code_membre();
+        while (Person::where('unique_code','=', $genKey)->first()) {
+            $genKey = unique_code_membre();
+            
+        }
+        return  $genKey;
+    }
+
 }

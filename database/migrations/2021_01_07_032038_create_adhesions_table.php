@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContributionsTable extends Migration
+class CreateAdhesionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateContributionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contributions', function (Blueprint $table) {
+        Schema::create('adhesions', function (Blueprint $table) {
             $table->id();
-            $table->string('compte_name');
-            $table->string('type_contribution');
-            $table->string('code_transaction')->unique();
-            $table->double('montant', 62,2);
             $table->foreignId('person_id');
+            $table->foreignId('compte_name');
+            $table->foreignId('montant');
             $table->foreignId('user_id');
-            $table->foreignId('compte_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +31,6 @@ class CreateContributionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contributions');
+        Schema::dropIfExists('adhesions');
     }
 }

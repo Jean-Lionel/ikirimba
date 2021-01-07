@@ -1,6 +1,14 @@
 <div>
 	{{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
+	<div class="text-center">
+		 <div wire:loading.delay>
+	        <div class="spinner-border" role="status">
+	  			<span class="sr-only">Loading...</span>
+			</div>
+	    </div>
+	</div>
+
 	<form action="">
 
 		<div class="row">
@@ -98,6 +106,25 @@
 
 						<input id="femme" wire:model="sexe" name="sexe" type="radio" value="FEMME" class="form-control form-control-sm">
 					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="">MONTANT</label>
+					<input wire:model="montant" type="number" required="" class="form-control form-control-sm">
+					@error('montant')
+					<p class="error text-danger">{{ $message }}</p>
+					@enderror
+				</div>
+
+				<div class="form-group">
+					<label for="">NUMERO DE COMPTE DU PARRANT</label>
+
+					<input type="text" wire:model="parent_code">
+					
+					@error('parent_code')
+					<p class="error text-danger">{{ $message }}</p>
+					@enderror
+					
 				</div>
 
 
