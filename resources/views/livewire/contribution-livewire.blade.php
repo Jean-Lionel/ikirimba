@@ -1,6 +1,16 @@
 <div>
 	{{-- In work, do what you enjoy. --}}
 
+
+	<div class="text-center">
+		 <div wire:loading.delay>
+	        <div class="spinner-border" role="status">
+	  			<span class="sr-only">Loading...</span>
+			</div>
+	    </div>
+	</div>
+
+
 	<form action="" wire:submit.prevent="saveContribution">
 
 		<div class="row">
@@ -54,8 +64,7 @@
 					<label for="">TYPE DE CONTRIBUTION</label>
 					<select class="form-control" name="" wire:model="type_contribution" id="">
 						<option value="">Choisissez le type de contribution</option>
-				
-						<option value="ADHESION">ADHESION</option>
+			
 						<option value="COTISATION MENSUELLE">COTISATION MENSUELLE</option>
 						
 						<option value="COTRIBUTION AU PROJET">COTRIBUTION AU PROJET</option>
@@ -88,13 +97,13 @@
 		
 
 				<div class="row">
-					<div class="col w-2">
+				{{-- 	<div class="col w-2">
 						<select wire:change="numberPerPage" class="form-control-sm">
 							@for($i=0; $i<200; $i+=20)
 							<option value="{{ $i }}">{{ $i }}</option>
 							@endfor
 						</select>
-					</div>
+					</div> --}}
 					<div class="col"><input class="form-control" wire:model="searchValue" type="text" placeholder="Rechercher ici !!!"></div>
 					
 					
@@ -106,7 +115,8 @@
 							<th>
 								#
 							</th>
-							<th>CODE NUMERO</th>
+							<th>NUMERO DU MEMBRE</th>
+							<th>CODE DE TRANSACTION</th>
 							<th>NOM ET PRENOM</th>
 							<th>TYPE DE CONTRIBUTION</th>
 							<th>MONTANT</th>
@@ -119,7 +129,8 @@
 						<tr>
 							<td>{{ $contribution->id }}</td>
 							<td>{{ $contribution->compte_name }}</td>
-							<td>{{ $contribution->compte_name }}</td>
+							<td>{{ $contribution->code_transaction }}</td>
+							<td>{{ $contribution->membre->fullName }}</td>
 							<td>{{ $contribution->type_contribution }}</td>
 							<td>{{ $contribution->montant }}</td>
 							<td>{{ $contribution->created_at }}</td>

@@ -1,6 +1,24 @@
 <div>
 	{{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
+	<div>
+        @if (session()->has('error'))
+            <div class="alert alert-success">
+                {{ session('error') }}
+            </div>
+        @endif
+    </div>
+
+    <div>
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+    </div>
+
+
+
 	<div class="text-center">
 		 <div wire:loading.delay>
 	        <div class="spinner-border" role="status">

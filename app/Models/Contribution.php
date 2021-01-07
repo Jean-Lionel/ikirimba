@@ -25,6 +25,6 @@ class Contribution extends Model
     }
 
     public function membre(){
-    	$this->belongsTo('App\Models\Person');
+    	return $this->belongsTo('App\Models\Person','person_id','id');
     }
 }
