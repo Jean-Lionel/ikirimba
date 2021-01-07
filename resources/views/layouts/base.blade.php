@@ -52,7 +52,7 @@
 <body class="d-flex flex-column h-100">
   <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light badge-warning">
       <a class="navbar-brand" href="#"><h4>IKIRIMBA</h4></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -76,6 +76,10 @@
               <div class="dropdown-divider"></div>
               
             </div>
+          </li>
+
+           <li class="nav-item">
+            <a class="nav-link" href="{{ route('contributions.index') }}">Contribution</a>
           </li>
 
         </ul>

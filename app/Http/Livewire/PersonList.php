@@ -13,10 +13,10 @@ use Livewire\WithPagination;
 class PersonList extends Component
 {
 	
-	//use WithPagination;
+	use WithPagination;
 	protected $paginationTheme = 'bootstrap';
 
-	private $persons = "";
+	private $persons;
 	public $provinces;
 	public $communes;
 	public $collines;

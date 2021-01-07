@@ -59,7 +59,7 @@
     	</div>
 
     	<div class="col-md-12">
-    		<table class="table">
+    		<table class="table table-sm">
     			<thead class="badge-dark">
     				<tr>
     					<th>#</th>
@@ -96,9 +96,9 @@
 
 
 
-             <div style="height: 100px; width: 100%; overflow: hidden;">
+          
            {{ $persons->links() }}
-             </div>
+             
     	</div>
     </div>
 </div>
