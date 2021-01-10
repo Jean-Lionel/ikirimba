@@ -21,10 +21,14 @@
   <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
   <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
   <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <meta name="theme-color" content="#563d7c">
 
 
   <style>
+    .fas{
+      font-size: 24px;
+    }
     .bd-placeholder-img {
       font-size: 1.125rem;
       text-anchor: middle;
@@ -64,11 +68,11 @@
             <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('people.index') }}">MEMBRE</a>
+            <a class="nav-link" href="{{ route('people.index') }}"><i class='fas fa-user-friends' style='font-size:24px'></i>MEMBRE</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              REGION
+              <i class="fas fa-search-location"></i>REGION
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ route('collines.index') }}">Colline</a>
@@ -79,12 +83,17 @@
           </li>
 
            <li class="nav-item">
-            <a class="nav-link" href="{{ route('contributions.index') }}">Contribution</a>
+            <a class="nav-link" href="{{ route('contributions.index') }}"> <i class="   fas fa-money-check-alt"></i>Contribution</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('people.create') }}">Adhésion</a>
+            <a class="nav-link" href="{{ route('people.create') }}"> <i class="fas fa-book-open"></i> Adhésion</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('people.create') }}"><i class="  fas fa-chart-line"></i>Rapport</a>
+          </li>
+
 
         </ul>
         <form class="form-inline my-2 my-lg-0">

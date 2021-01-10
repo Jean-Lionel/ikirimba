@@ -26,14 +26,26 @@ Route::get('/', function () {
 //Route::get('/',[PersonController::class,'index'])
 
 
-Route::resource('communes', CommuneController::class);
-Route::resource('provinces', ProvinceController::class);
-Route::resource('collines', CollineController::class);
-Route::resource('groupements', GroupementController::class);
-Route::resource('people', PersonController::class);
-Route::resource('contributions', ContributionController::class);
+// Route::resource('communes', CommuneController::class);
+// Route::resource('provinces', ProvinceController::class);
+// Route::resource('collines', CollineController::class);
+// Route::resource('groupements', GroupementController::class);
+// Route::resource('people', PersonController::class);
+// Route::resource('contributions', ContributionController::class);
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::middleware(['auth:sanctum', 'verified'])->get('/people', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+
+
+Route::middleware(['auth'])->group(function(){
+
+	Route::resource('communes', CommuneController::class);
+	Route::resource('provinces', ProvinceController::class);
+	Route::resource('collines', CollineController::class);
+	Route::resource('groupements', GroupementController::class);
+	Route::resource('people', PersonController::class);
+	Route::resource('contributions', ContributionController::class);
+
+});
