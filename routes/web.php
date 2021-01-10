@@ -6,6 +6,7 @@ use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\GroupementController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\RapportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,9 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('collines', CollineController::class);
 	Route::resource('groupements', GroupementController::class);
 	Route::resource('people', PersonController::class);
+	
 	Route::resource('contributions', ContributionController::class);
+
+	Route::resource('rapport', RapportController::class);
 
 });
