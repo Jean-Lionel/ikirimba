@@ -1,5 +1,6 @@
 <?php
 
+
 //La function generer le numero unique 
 function unique_code_membre($limit = 13)
 {
@@ -10,4 +11,13 @@ function unique_code_membre($limit = 13)
 function unique_code_transaction()
 {
 	return random_int(1000000000,9999999999);
+}
+
+function formatNumber($number){
+	return number_format($number);
+}
+
+function setActiveRouter($route){
+
+	return Route::is($route) ? 'active' : '';
 }
