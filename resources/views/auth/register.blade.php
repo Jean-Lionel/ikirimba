@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        {{-- <x-jet-authentication-card-logo /> --}}
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -15,9 +15,15 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-jet-label for="username" value="{{ __('UTILISATEUR') }}" />
+                <x-jet-input id="username" class="block mt-1 w-full" type="username" name="username" :value="old('username')" required />
             </div>
+
+             <div class="mt-4">
+                <x-jet-label for="email" value="{{ __('TELEPHONE') }}" />
+                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"  />
+            </div>
+
 
             <div class="mt-4">
                 <x-jet-label for="password" value="{{ __('Password') }}" />

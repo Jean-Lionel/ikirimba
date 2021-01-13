@@ -94,9 +94,8 @@ body.modal-open {
 </style>
 
 <div class="mt-4">
-    {{-- Care about people's approval and you will be their prisoner.
-    --}}
 
+  {{-- {{ setActiveRouter('rapport.index') }} --}}
     <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">×</span>
@@ -111,9 +110,12 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-dollar fa-5x"></i>
       </div>
-      <h6 class="text-uppercase">MINERVAL</h6>
+      <h6 class="text-uppercase text-center">CASSE D'ADHESION</h6>
       
-      <h5>50000</h5>
+      <h5 class="d-flex justify-content-around">
+        <i class="fas fa-funnel-dollar"></i>
+        <span> {{ number_format($adhesion) }} #FBU </span>
+         </h5>
   </div>
 </div>
 </div>
@@ -123,8 +125,13 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-list fa-4x"></i>
       </div>
-      <h6 class="text-uppercase">  CONTRIBUTION </h6>
-      <h5>120</h5>
+      <div class="">
+        <h6 class="text-uppercase text-center"> MEMBRE </h6>
+         <h5 class="d-flex justify-content-around">
+          <i class="fas fa-people-carry"></i>  
+          <span>{{ number_format($membreTotal) }}</span>
+        </h5>
+      </div>
   </div>
 </div>
 </div>
@@ -134,8 +141,10 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-shopping-cart fa-5x"></i>
       </div>
-      <h6 class="text-uppercase">VENTE</h6>
-      <h6>1203.0</h6>
+      <h6 class="text-uppercase text-center">CONTRIBUTION</h6>
+      <h5 class="d-flex justify-content-around">
+        <i class="fas fa-file-invoice-dollar"></i>
+         <span>{{ number_format($contributions)  }} #FBU</span></h5>
   </div>
 </div>
 </div>
@@ -145,35 +154,30 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-share fa-5x"></i>
       </div>
+     
       <h6 class="text-uppercase">MONTANT TOTAL</h6>
       
-      <h5>2560</h5>
+      <h5 class="d-flex justify-content-around">
+        <i class="fab fa-amazon-pay"></i>
+
+       {{ number_format($contributions + $adhesion) }} #FBU
+      </h5>
   </div>
 </div>
 </div>
 </div>
 
 
-
-<div class="row">
-    <div class="col-md-6">
-     <h4>Liste de ceux qui ont déjà payé
-     <div class="row">
-         
+<div >
+  <div class="row">
+    <div class="col-md-6 test-element">
+        <canvas id="myChart" width="400px"> </canvas>
     </div>
-
-
-</div>
-<div class="col-md-6">
- <h4>Liste de ceux qui n'ont pas encore payé</h4>
- 
-</div>
-</div>
-
-
-
-<div class="test-element">
-    <canvas id="myChart" width="400px"> </canvas>
+    <div class="col-md-6" class="test-element">
+      <canvas id="myChart2" width="400px"></canvas>
+    </div>
+  </div>
+    
 </div>
 
 
@@ -186,20 +190,22 @@ body.modal-open {
     var chartTyp = ['bar','line','pie','scatter'];
 
     var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: chartTyp[  Math.floor(Math.random() * chartTyp.length) ],
+        type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
             datasets: [{
                 label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [12, 19, 3, 5, 2, 3,6],
                 backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 120, 0.2)'
                 ],
                 borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -207,7 +213,47 @@ body.modal-open {
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 109, 140, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+
+    const myChart2 =  new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3,6],
+                backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 159, 120, 0.2)'
+                ],
+                borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 109, 140, 1)'
                 ],
                 borderWidth: 1
             }]

@@ -62,8 +62,8 @@
     		<table class="table table-sm">
     			<thead class="badge-dark">
     				<tr>
-    					<th>#</th>
-    					<th>CODE</th>
+    					<th>N°</th>
+    					<th>COMPTE DU MEMBRE</th>
     					<th>NOM</th>
     					<th>PRENOM</th>
     					<th>TELEPHONE</th>
@@ -73,10 +73,10 @@
     				</tr>
     			</thead>
     			<tbody>
-    				@foreach($persons as $person)
+    				@foreach($persons as $key =>$person)
 
     				<tr>
-    					<td>{{ $person->id }}</td>
+    					<td>{{ ++$key }}</td>
     					<td>{{ $person->compte->name ?? '' }}</td>
     					<td>{{ $person->first_name }}</td>
     					<td>{{ $person->last_name }}</td>

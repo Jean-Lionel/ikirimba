@@ -7,6 +7,7 @@ use App\Http\Controllers\GroupementController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RapportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,5 +52,6 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('contributions', ContributionController::class);
 
 	Route::resource('rapport', RapportController::class);
+	Route::resource('users', UserController::class);
 
 });

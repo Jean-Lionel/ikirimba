@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="author" content="Jean Lionel NININAHAZWE">
   <meta name="generator" content="Jekyll v4.1.1">
-  <title>IKIRIMBA</title>
+  <title>L.C.P.C | </title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/">
+ {{--  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/"> --}}
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -37,6 +37,9 @@
       -ms-user-select: none;
       user-select: none;
     }
+    .active{
+      background: white;
+    }
     main .container {
 
       padding-top: 0px; 
@@ -57,7 +60,7 @@
   <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-light badge-warning">
-      <a class="navbar-brand" href="#"><h4>IKIRIMBA</h4></a>
+      <a class="navbar-brand" href="#"><h4> <i class="fas fa-house-user"></i> L.C.P.C</h4></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -68,38 +71,54 @@
             <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('people.index') }}"><i class='fas fa-user-friends' style='font-size:24px'></i>MEMBRE</a>
+            <a class="nav-link {{ setActiveRouter('people.index') }}" href="{{ route('people.index') }}"><i class='fas fa-user-friends' style='font-size:24px'></i>MEMBRE</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fas fa-search-location"></i>REGION
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('collines.index') }}">Colline</a>
-              <a class="dropdown-item" href="{{ route('groupements.index') }}">Groupement</a>
+              <a class="dropdown-item" href="{{ route('collines.index') }}">Enregistrer la Colline | le Quartier</a>
+              <a class="dropdown-item" href="{{ route('groupements.index') }}">Création des Groupements</a>
               <div class="dropdown-divider"></div>
               
             </div>
           </li>
 
            <li class="nav-item">
-            <a class="nav-link" href="{{ route('contributions.index') }}"> <i class="   fas fa-money-check-alt"></i>Contribution</a>
+            <a class="nav-link {{ setActiveRouter('contributions.index') }}" href="{{ route('contributions.index') }}"> <i class="   fas fa-money-check-alt"></i>Contribution</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('people.create') }}"> <i class="fas fa-book-open"></i> Adhésion</a>
+            <a class="nav-link {{ setActiveRouter('people.create') }}" href="{{ route('people.create') }}"> <i class="fas fa-book-open"></i> Adhésion dans L.C.P.C</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('rapport.index') }}"><i class="  fas fa-chart-line"></i>Rapport</a>
+            <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="  fas fa-chart-line"></i>Rapport</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="  fas fa-user-cog"></i>Utilisateur</a>
           </li>
 
 
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        {{-- <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+ --}}
+
+        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-jet-dropdown-link class="btn btn-outline-success my-2 my-sm-0" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                {{ __('Logout') }}
+                            </x-jet-dropdown-link>
+                        </form>
       </div>
     </nav>
 
@@ -116,7 +135,7 @@
 
   <footer class="footer mt-auto py-3">
     <div class="container">
-      <span class="text-muted">IKIRIMBA</span>
+      <span class="text-muted">L.C.P.C  &copy;  <i>nininahazwe</i></span>
     </div>
   </footer>
 

@@ -40,7 +40,7 @@
                 @endif --}}
 
                 <x-jet-button class="ml-2">
-                    {{ __('Login') }}
+                    {{ __('Se Connecter') }}
                 </x-jet-button>
             </div>
         </form>

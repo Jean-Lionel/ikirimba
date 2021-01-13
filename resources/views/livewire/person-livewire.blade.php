@@ -31,6 +31,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
+				<h6>INDETIFICATION DU NOUVEAU MEMBRE DANS LE L.C.P.C</h6>
 
 				@if($provinces)
 
@@ -97,6 +98,7 @@
 
 			@if($selectedGroupement)
 			<div class="col-md-6">
+				<h6 >ENREGISTREMENT DES MEMBRES DANS LE PROJET <b>L.C.P.C</b></h6>
 
 				@if($membre != null)
 
@@ -135,7 +137,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="">NUMERO DE COMPTE DU PARRANT</label>
+					<label for="">NUMERO DE COMPTE DU PARRAIN DIRECT</label>
 
 					<input type="text" wire:model="parent_code">
 					

@@ -67,7 +67,7 @@
 			
 						<option value="COTISATION MENSUELLE">COTISATION MENSUELLE</option>
 						
-						<option value="COTRIBUTION AU PROJET">COTRIBUTION AU PROJET</option>
+						{{-- <option value="COTRIBUTION AU PROJET">COTRIBUTION AU PROJET</option> --}}
 					</select>
 
 					@error('type_contribution')

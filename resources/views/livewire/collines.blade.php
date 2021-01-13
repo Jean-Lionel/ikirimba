@@ -7,7 +7,7 @@
     		<div class="form-group">
     			<label for="">Province</label>
     			 <select wire:model="selectedProvince" class="form-control">
-                <option value="" selected>Choisissez une provinces</option>
+                <option value="" selected>Choisissez une province</option>
                 @foreach($provinces as $province)
                     <option value="{{ $province->id }}">{{ $province->name }}</option>
                 @endforeach
@@ -37,7 +37,7 @@
     	<div class="col-md-6">
             <div class="form-group">
             	<label for="">Colline | Quartier</label>
-            	<input required="" type="text" wire:model="colline" class="form-control">
+            	<input required="" placeholder="Ecrire le nom du colinne ou du Quartier" type="text" wire:model="colline" class="form-control">
             	
             </select>
             </div>
