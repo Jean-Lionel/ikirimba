@@ -28,6 +28,9 @@ class PersonList extends Component
     public $selectedGroupement = null;
     public $groupement = null;
 
+    public $searchValue = null;
+    private $parentGroupement = [];
+
     public function updatingProvinces()
     {
         $this->resetPage();
@@ -36,7 +39,7 @@ class PersonList extends Component
 
 	public function mount(){
 
-		$this->persons = Person::latest()->paginate();
+		//$this->persons = 
 		$this->provinces = Province::all();
 		$this->communes = collect();
 		$this->collines = collect();
@@ -45,9 +48,36 @@ class PersonList extends Component
 
     public function render()
     {
+        $searchValue = '%'.$this->searchValue.'%';
+
+        //$persons = Person::latest()->paginate(10);
+         // $persons= Person::where('groupement_id','=', $this->selectedGroupement)
+         //                  ->orWhere('first_name','LIKE',$searchValue)
+         //                  ->orWhere('last_name','LIKE',$searchValue)
+         //                  ->orWhere('cni','LIKE',$searchValue)
+         //                  ->orWhere('telephone','LIKE',$searchValue)->paginate();
+
+        $selected =  array_merge([$this->selectedGroupement], $this->parentGroupement);
+
+        $persons = Person::latest()
+                           ->whereIn('groupement_id', $selected)
+                           ->where(function($query) use ( $searchValue){
+                                    
+                                    if($searchValue !=null){
+                                        $query->where('first_name','LIKE',$searchValue)
+                                      ->orWhere('last_name','LIKE',$searchValue)
+                                      ->orWhere('cni','LIKE',$searchValue)
+                                      ->orWhere('telephone','LIKE',$searchValue)
+                                    ;
+                                    }
+                                
+
+                           })
+                           ->paginate();
+
         return view('livewire.person-list',
         	[
-        		'persons' => $this->persons
+        		'persons' => $persons
 
         	]
 
@@ -63,9 +93,13 @@ class PersonList extends Component
 
         $groupements = Groupement::whereIn('Colline_id', $collines->map->id->toArray())->get();
 
-        $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
+        // $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
 
-        $this->selectCommune = null;
+        $this->parentGroupement = $groupements->map->id->toArray();
+
+        $this->selectedGroupement = null;
+
+        // $this->selectCommune = null;
     }
     
 
@@ -75,21 +109,29 @@ class PersonList extends Component
 
         $groupements = Groupement::whereIn('Colline_id', $this->collines->map->id->toArray())->get();
 
-        $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
+        // $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
+
+        $this->parentGroupement = $groupements->map->id->toArray();
+        $this->selectedGroupement = null;
 
 
-        $this->selectColline = null;
+
+
+        // $this->selectColline = null;
     }
 
     public function updatedSelectColline($colline_id){
 
         $this->groupements = Groupement::where('colline_id','=', $colline_id)->get();
 
-       $this->persons = Person::whereIn('groupement_id',$this->groupements->map->id->toArray())->paginate();
+       // $this->persons = Person::whereIn('groupement_id',$this->groupements->map->id->toArray())->paginate();
 
-
-
+        $this->parentGroupement = $this->groupements->map->id->toArray();
         $this->selectedGroupement = null;
+
+
+
+        // $this->selectedGroupement = null;
     }
 
     public function updatedSelectedGroupement($groupement){

@@ -35,6 +35,7 @@ class PersonLivewire extends Component
     public $sexe = "";
     public $montant = "";
     public $parent_code = "";
+   
 
 
     
@@ -71,12 +72,8 @@ class PersonLivewire extends Component
     }
 
     public function updatedSelectColline($colline){
-
-
         $this->groupements = Groupement::where('colline_id','=', $colline)->get();
         $this->selectedGroupement =null;
-
-
     }
 
     private function resetInputFields(){
@@ -88,7 +85,6 @@ class PersonLivewire extends Component
 
  }
 
-
  protected $rules = [
 
         'first_name' => 'required',
@@ -96,19 +92,12 @@ class PersonLivewire extends Component
         'telephone' => 'required',
         'cni' => 'required',
         'montant' => 'required|numeric|min:15000|max:15000',
-        
-
  ];
-
-
 
  private function validateParentCode(){
     if(Compte::all()->count() > 0){
         $this->rules['parent_code'] = 'required|exists:comptes,name';
     }
-
-
-
  }
 
 protected $messages = [
@@ -126,7 +115,6 @@ protected $messages = [
  public function store(){
 
     $this->validateParentCode();
-
     $this->validate();
 
     //Si le membre ne depasser pas 5 enfant
@@ -152,7 +140,7 @@ protected $messages = [
         ]);
 
         $compte = Compte::create([
-            'name' => $personne->id,
+            'name' => $this->getUniqueAcountName(),
             'montant' => 0,
             'person_id' =>  $personne->id
 
@@ -172,22 +160,12 @@ protected $messages = [
         DB::rollback();
 
         session()->flash('error',$e->getMessage());
-       
-
    }
 
     }
 
-  
-
-
 }
-
    
-
-
-   
-
     //Verifier que le membre a le doit d'ajouter le nouveau adherant
 
     private function checkNumberEnfant(){
@@ -276,6 +254,29 @@ protected $messages = [
             
         }
         return  $genKey;
+    }
+
+    private function getUniqueAcountName()
+    {
+       $genName = code_name();
+
+       $i = 0;
+
+        while (Compte::where('name','=', $genName)->first()) {
+            $genName = code_name();
+             $i++;
+
+             //Si on arrive a 10 tours sans trouver le resultat on ajouter une
+             //On ajoute le prefixe
+             if($i >=1000)
+             {
+                $genName = rand(0, 999).'-'.$genName;
+             }
+            
+        }
+
+       return $genName;
+        
     }
 
     public function saveSharedMontant($enfant,$parent , $montant){

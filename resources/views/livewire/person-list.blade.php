@@ -4,13 +4,13 @@
 
   
     <div class="row">
-    	<div class="col-md-4">
+    	<div class="col-md-12">
     		  <h2>Liste des membres</h2>
              {{--  <div><a href="{{ route('people.create') }}" class="btn btn-sm btn-info btn-block">Nouveau Membre</a></div> --}}
     	</div>
-    	<div class="col-md-8">
+    	<div class="col-md-12">
     		<div class="row">
-    			<div class="col-md-3 col-sm-6">
+    			<div class="col-md-2 col-sm-6">
     				<label for="">Province</label>
     				<select name="" wire:model="selectedProvince" id="" class="form-control form-control-sm">
     					<option value="">Choisissez ....</option>
@@ -21,7 +21,7 @@
     					@endforeach
     				</select>
     			</div>
-    			<div class="col-md-3 col-sm-6">
+    			<div class="col-md-2 col-sm-6">
     				<label for="">Commune</label>
     				<select name="" wire:model="selectCommune" id="" class="form-control form-control-sm">
                         <option value="">Choisissez ....</option>
@@ -32,7 +32,7 @@
                     </select>
                 </div>
 
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-2 col-sm-6">
                     <label for="">Colinne</label>
                     <select name="" id="" wire:model="selectColline" class="form-control form-control-sm">
                         <option value="">Choisissez ici ....</option>
@@ -54,12 +54,17 @@
                         
                     </select>
     			</div>
+
+                <div class="col-md-3 col-sm-6">
+                    <label for="">Rechercher</label>
+                   <input type="text" wire:model="searchValue" placeholder="Saisissez ici" class="form-control">
+                </div>
     		</div>
     		
     	</div>
 
     	<div class="col-md-12">
-    		<table class="table table-sm">
+    		<table class="table table-sm table-responsive">
     			<thead class="badge-dark">
     				<tr>
     					<th>N°</th>
