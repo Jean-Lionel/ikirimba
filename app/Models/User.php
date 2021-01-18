@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'username',
+        'description',
     ];
 
     /**
@@ -59,4 +60,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function isAdmin()
+    {
+        return true;
+    }
 }

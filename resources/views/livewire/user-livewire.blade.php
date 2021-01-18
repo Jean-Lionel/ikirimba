@@ -32,7 +32,7 @@
 
     		<div class="col-md-4 form-group">
     			<label for=""> Nom et Prénom</label>
-    			<input wire:model="name" type="text" class="form-control">
+    			<input wire:model="name" type="text" class="form-control" autofocus>
                 @error('name')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
@@ -46,7 +46,7 @@
     		</div>
     		<div class="col-md-4 form-group">
     			<label for="">Email | Téléphone</label>
-    			<input username="email" type="text" class="form-control">
+    			<input wire:model="email" type="text" class="form-control">
                 @error('email')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
@@ -64,13 +64,16 @@
     			<label for="">Confirmer </label>
     			<input wire:model="password_confirmation" type="password" class="form-control">
     		</div>
-    		<div class="col-md-4 form-group">
-    			<label for=""> </label>
-    			<input type="submit" value="Enregistrer" class="form-control btn btn-primary">
-    		</div>
-            <div class="col-md-12">
-                <textarea wire:model="description" class="form-control" name="" id="" cols="30" rows="10"></textarea>
+             <div class="col-md-12">
+                <textarea wire:model="description" class="form-control"></textarea>
             </div>
+    		<div class="col-md-4 d-flex form-group mt-3 justify-content-around">
+    			
+    			<input type="submit" value="Enregistrer" class="form-control btn btn-primary">
+
+                <input wire:click="annuler" type="reset"  value="Annuler" class="form-control">
+    		</div>
+           
     	</div>
     	
     </form>
@@ -84,7 +87,7 @@
                 <i class="fas fa-user-plus"></i>Ajouter un utilisateur</button>
         </div>
         
-        <table class=" table table-sm">
+        <table class="table table-sm table-bordered">
             <thead class="badge-primary">
                 <tr>
                     <th>Nom et prénom </th>
@@ -100,7 +103,7 @@
                        <td>{{ $user->username }}</td>
                        <td>{{ $user->email }}</td>
                        <td> 
-                        <button class="btn btn-info btn-sm">
+                        <button wire:click="modifier({{ $user->id }})" class="btn btn-info btn-sm">
                         <i class="fas fa-user-edit"></i></button>
                         <button class="btn btn-danger btn-sm">
                         <i class="fas fa-user-minus"></i></button>

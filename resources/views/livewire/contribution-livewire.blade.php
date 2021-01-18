@@ -39,7 +39,7 @@
 				<div class="form-group">
 
 					<label for="">Saisir le code du membre</label>
-					<input type="text" placeholder="Saisir le code du membre" wire:model="compteName" class="form-control">
+					<input type="text" placeholder="Saisir le code du membre" wire:model="compteName" class="form-control form-control-sm">
 
 					@error('compteName')
 					<span>{{ $message }}</span>
@@ -48,7 +48,7 @@
 					@if ($compte)
 					{{-- expr --}}
 					<span>Nom et prénom : {{ $compte->membre->fullName }}</span> <br>
-					<span>Montant : {{ $compte->montant }}</span>
+					{{-- <span>Montant : {{ $compte->montant }}</span> --}}
 
 					@else
 					<span>INVALID COMPTE</span>
@@ -62,13 +62,17 @@
 
 				<div class="form-group">
 					<label for="">TYPE DE CONTRIBUTION</label>
-					<select class="form-control" name="" wire:model="type_contribution" id="">
-						<option value="">Choisissez le type de contribution</option>
+					<select class="form-control form-control-sm" name="" wire:model="type_contribution" id="">
+						<option value="">Choisissez le compte à créditer</option>
 			
-						<option value="COTISATION MENSUELLE">COTISATION MENSUELLE</option>
+						<option value="A.E.J.T-BURUNDI">A.E.J.T-BURUNDI</option>
 						
 						{{-- <option value="COTRIBUTION AU PROJET">COTRIBUTION AU PROJET</option> --}}
 					</select>
+					@if($type_contribution)
+					<p>COMPTE : 3350</p>
+					<p>ECOCASH : 79 742 610</p>
+					@endif
 
 					@error('type_contribution')
 					<span class="error text-danger">{{ $message }}</span>
@@ -76,24 +80,31 @@
 					@enderror
 
 				</div>
+				
+
 				<div class="form-group">
-					<label for="">Montant</label>
-					<input type="number" class="form-control" wire:model="montant">
+					<label for="">Nom et prénom du membre</label>
+					<input type="text" wire:model="person_name" class="form-control form-control-sm">
+					
+				</div>
+
+				<div class="form-group">
+					<label for="">Montant depose</label>
+					<input type="text" class="form-control form-control-sm" wire:model="montant">
 					@error('montant')
 					<span class="error text-danger">{{ $message }}</span>
 					@enderror
-
 				</div>
 
 
 				<div class="form-group">
-					<input type="submit" value="Enregistrer" class="btn btn-sm btn-block btn-info">
+					<input type="submit" value="Valider" class="btn btn-sm btn-block btn-info">
 				</div>
 				@endif
 
 			</div>
 
-			<div class="col-md-8">
+			<div class="col-md-12 col-sm-12">
 		
 
 				<div class="row">
@@ -104,21 +115,21 @@
 							@endfor
 						</select>
 					</div> --}}
-					<div class="col"><input class="form-control" wire:model="searchValue" type="text" placeholder="Rechercher ici !!!"></div>
+					<div class="col-md-4"><input class="form-control" wire:model="searchValue" type="text" placeholder="Rechercher ici !!!"></div>
 					
 					
 					
 				</div>
-				<table class="table table-sm">
+				<h4>Liste des contributions</h4>
+				<table class="table table-sm table-hover">
 					<thead class="badge-dark">
 						<tr>
-							<th>
-								#
-							</th>
+					
 							<th>NUMERO DU MEMBRE</th>
 							<th>CODE DE TRANSACTION</th>
 							<th>NOM ET PRENOM</th>
 							<th>TYPE DE CONTRIBUTION</th>
+							<th>COMPTE CREDITER</th>
 							<th>MONTANT</th>
 							<th>DATE</th>
 						</tr>
@@ -127,11 +138,12 @@
 					<tbody>
 						@foreach($contributions as $contribution)
 						<tr>
-							<td>{{ $contribution->id }}</td>
+							
 							<td>{{ $contribution->compte_name }}</td>
 							<td>{{ $contribution->code_transaction }}</td>
 							<td>{{ $contribution->membre->fullName }}</td>
 							<td>{{ $contribution->type_contribution }}</td>
+							<td>3350</td>
 							<td>{{ $contribution->montant }}</td>
 							<td>{{ $contribution->created_at }}</td>
 							

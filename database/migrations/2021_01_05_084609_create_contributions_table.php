@@ -20,7 +20,7 @@ class CreateContributionsTable extends Migration
             $table->string('code_transaction')->unique();
             $table->double('montant', 62,2);
             $table->foreignId('person_id');
-            $table->foreignId('user_id');
+            $table->string('person_name')->nullable();
             $table->foreignId('compte_id');
             $table->timestamps();
             $table->softDeletes();

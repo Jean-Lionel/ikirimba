@@ -110,7 +110,7 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-dollar fa-5x"></i>
       </div>
-      <h6 class="text-uppercase text-center">CASSE D'ADHESION</h6>
+      <h6 class="text-uppercase text-center">COMPTE D'ADHESION</h6>
       
       <h5 class="d-flex justify-content-around">
         <i class="fas fa-funnel-dollar"></i>
@@ -126,7 +126,7 @@ body.modal-open {
           <i class="fa fa-list fa-4x"></i>
       </div>
       <div class="">
-        <h6 class="text-uppercase text-center"> MEMBRE </h6>
+        <h6 class="text-uppercase text-center"> MEMBRE EN GENERAL </h6>
          <h5 class="d-flex justify-content-around">
           <i class="fas fa-people-carry"></i>  
           <span>{{ number_format($membreTotal) }}</span>
@@ -141,7 +141,7 @@ body.modal-open {
         <div class="rotate">
           <i class="fa fa-shopping-cart fa-5x"></i>
       </div>
-      <h6 class="text-uppercase text-center">CONTRIBUTION</h6>
+      <h6 class="text-uppercase text-center">COMPTE DES COTISATION</h6>
       <h5 class="d-flex justify-content-around">
         <i class="fas fa-file-invoice-dollar"></i>
          <span>{{ number_format($contributions)  }} #FBU</span></h5>
@@ -164,11 +164,64 @@ body.modal-open {
       </h5>
   </div>
 </div>
-</div>
-</div>
 
+</div>
+</div>
 
 <div >
+
+  <div class="row">
+    
+
+    <div class="row col-md-12">
+      <div class="col-3"><h4>Liste des membres</h4></div>
+
+      <div class="col-3">
+            <label for="">Province {{ $selectedProvince  }}</label>
+            <select name="" wire:model="selectedProvince" id="" class="form-control form-control-sm">
+              <option value="">Choisissez ....</option>
+
+              @foreach($provinces as $province)
+              <option value="{{ $province->id }}">{{ $province->name }}</option>
+
+              @endforeach
+            </select>
+          </div>
+
+
+         
+
+    </div>
+    <div class="col-md-12">
+      <table class="table-sm table table-hover">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>N° du membre</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+          </tr>
+          
+        </thead>
+
+        <tbody>
+
+          @foreach($membres as $key => $membre)
+          <tr>
+            <td>{{ ++$key }}</td>
+            <td>{{ $membre->compte->name }}</td>
+            <td>{{ $membre->first_name }}</td>
+            <td>{{ $membre->last_name }}</td>
+          </tr>
+
+          @endforeach          
+        </tbody>
+      </table>
+
+        {{ $membres->links() }}
+ 
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6 test-element">
         <canvas id="myChart" width="400px"> </canvas>
@@ -183,7 +236,7 @@ body.modal-open {
 
 </div>
 
-
+{{-- 
 @push('scripts')
 
 <script>
@@ -271,4 +324,4 @@ body.modal-open {
 </script>
 
 
-@endpush
+@endpush --}}

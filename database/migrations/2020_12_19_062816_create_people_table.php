@@ -17,7 +17,7 @@ class CreatePeopleTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('cni');
+            $table->string('cni')->nullable();
             $table->string('telephone');
             
             $table->string('sexe');
@@ -28,6 +28,7 @@ class CreatePeopleTable extends Migration
             $table->double('montant')->nullable();
 
             $table->foreignId('groupement_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });

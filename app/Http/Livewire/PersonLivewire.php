@@ -90,7 +90,6 @@ class PersonLivewire extends Component
         'first_name' => 'required',
         'last_name' => 'required',
         'telephone' => 'required',
-        'cni' => 'required',
         'montant' => 'required|numeric|min:15000|max:15000',
  ];
 
@@ -132,7 +131,6 @@ protected $messages = [
             'last_name' => $this->last_name,
             'sexe' => $this->sexe,
             'telephone' => $this->telephone,
-            'cni' => $this->cni,
             'montant' => $this->montant,
             'code_parrent' => $compte->person_id ?? null,//$this->getUniqueCode(),
             'groupement_id' => $this->selectedGroupement

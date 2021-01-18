@@ -19,6 +19,7 @@ class UserLivewire extends Component
 	public $username;
 	public $description;
 	public $password;
+    public $identification;
 	public $password_confirmation;
 	public $showForm = false;
 
@@ -46,17 +47,34 @@ class UserLivewire extends Component
 
     public function saveUser(){
     	$this->validate();
-
-
     	if($this->password === $this->password_confirmation)
     	{
-    		User::create([
+
+
+         if($this->identification){
+            $user = User::find($this->identification) ?? new User;
+
+            $user->update([
+                'name' => $this->name,
+                'username' => $this->username,
+                'email' => $this->email,
+                'description' => $this->description,
+                'password' => Hash::make($this->password),
+
+            ]);
+
+         }else{
+
+            User::create([
             'name' => $this->name,
             'username' => $this->username,
-            'email' => $this->password,
+            'email' => $this->email,
             'description' => $this->description,
             'password' => Hash::make($this->password),
-      	  ]);
+          ]);
+
+         }
+    	
 
         	$this->email = "";
 
@@ -68,5 +86,26 @@ class UserLivewire extends Component
     		session()->flash('message','Les deux mot de passe sont différents');
     	}
     	
+    }
+
+    public function modifier($id)
+    {
+        $user = User::find($id) ?? new user; 
+
+        $this->identification = $user->id;
+        $this->name = $user->name;
+        $this->username = $user->username;
+        $this->email = $user->email;
+        $this->description = $user->description;
+        $this->showForm = true;
+
+        //dd($user );
+        
+    }
+
+
+    public function annuler(){
+         $this->showForm = false;
+         $this->reset();
     }
 }

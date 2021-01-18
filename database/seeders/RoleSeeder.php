@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -19,8 +20,11 @@ class RoleSeeder extends Seeder
         	'name' => 'ADMIN'
         ]);
 
-         Role::create([
+        Role::create([
         	'name' => 'ADHESION'
+        ]);
+        Role::create([
+            'name' => "CONFIRMATION D'ADHESION"
         ]);
 
         

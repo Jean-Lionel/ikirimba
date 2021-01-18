@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Models\Groupement;
 use App\Models\Person;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
 
 class PersonController extends Controller
 {
@@ -16,6 +18,8 @@ class PersonController extends Controller
      */
     public function index()
     {
+       //dd( Gate::allows('create-person'));
+       $this->authorize('create-person');
         
         return view('people.index');
     }

@@ -78,9 +78,9 @@
               <i class="fas fa-search-location"></i>REGION
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('collines.index') }}">Enregistrer la Colline | le Quartier</a>
-              <a class="dropdown-item" href="{{ route('groupements.index') }}">Création des Groupements</a>
-              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{{ route('collines.index') }}">Enregistrement des colines</a>
+              <a class="dropdown-item" href="{{ route('groupements.index') }}">Création des Groupements de base</a>
+              
               
             </div>
           </li>

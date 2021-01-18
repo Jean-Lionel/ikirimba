@@ -17,8 +17,6 @@
         @endif
     </div>
 
-
-
 	<div class="text-center">
 		 <div wire:loading.delay>
 	        <div class="spinner-border" role="status">
@@ -31,7 +29,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h6>INDETIFICATION DU NOUVEAU MEMBRE DANS LE L.C.P.C</h6>
+				<h6>IDETIFICATION DU NOUVEAU MEMBRE DANS LE L.C.P.C</h6>
 
 				@if($provinces)
 
@@ -81,7 +79,7 @@
 				@if(count($groupements) > 0)
 
 				<div class="form-group">
-					<label for="">Groupement</label>
+					<label for="">Groupement de base</label>
 					<select wire:model="selectedGroupement" class="form-control form-control-sm">
 						<option value="" selected>Choisissez une quartier</option>
 						@foreach($groupements as $groupement)
@@ -98,7 +96,7 @@
 
 			@if($selectedGroupement)
 			<div class="col-md-6">
-				<h6 >ENREGISTREMENT DES MEMBRES DANS LE PROJET <b>L.C.P.C</b></h6>
+				<h6 >ENREGISTREMENT DU MEMBRE DANS LE PROJET <b>L.C.P.C</b></h6>
 
 				@if($membre != null)
 
@@ -107,18 +105,25 @@
 				</div>
 
 				@endif
-				<div class="form-group">
-					<label for="">Nom</label>
-					<input wire:model="first_name" type="text" required="" class="form-control form-control-sm">
+				<div class="form-group row container">
+
+					<label class="col-4" for="">Nom</label>
+					<input wire:model="first_name" type="text" required="" class="col-8">
+					@error('first_name')
+					<p class="error text-danger">{{ $message }}</p>
+					@enderror
 				</div>
-				<div class="form-group">
-					<label for="">Prénom</label>
-					<input wire:model="last_name" type="text" required="" class="form-control form-control-sm">
+				<div class="form-group row container">
+					<label  class="col-4" for="">Prénom</label>
+					<input wire:model="last_name" type="text" required="" class="form-control form-control-sm col-8">
+					@error('last_name')
+					<p class="error text-danger">{{ $message }}</p>
+					@enderror
 				</div>
 
-				<div class="form-group">
-					<label for="">Sexe</label>
-					<div class="d-flex">
+				<div class="form-group row container">
+					<label class="col-4" for="">Sexe</label>
+					<div class="d-flex col-8">
 						<label for="homme">HOMME</label>
 						<input id="homme" wire:model="sexe"  name="sexe" type="radio"  value="HOMME" class="form-control form-control-sm">
 
@@ -128,18 +133,18 @@
 					</div>
 				</div>
 
-				<div class="form-group">
-					<label for="">MONTANT</label>
-					<input wire:model="montant" type="number" required="" class="form-control form-control-sm">
+				<div class="form-group row container">
+					<label class="col-4" for="">Montant d'adhésion</label>
+					<input wire:model="montant" type="text" required="" class="form-control form-control-sm col-8">
 					@error('montant')
 					<p class="error text-danger">{{ $message }}</p>
 					@enderror
 				</div>
 
-				<div class="form-group">
-					<label for="">NUMERO DE COMPTE DU PARRAIN DIRECT</label>
+				<div class="form-group row container">
+					<label class="col-8" for="">Numéro du parrain</label>
 
-					<input type="text" wire:model="parent_code">
+					<input type="text" class="col-4" wire:model="parent_code">
 					
 					@error('parent_code')
 					<p class="error text-danger">{{ $message }}</p>
@@ -148,14 +153,12 @@
 				</div>
 
 
-				<div class="form-group">
-					<label for="">CNI</label>
-					<input wire:model="cni" type="text" required="" class="form-control form-control-sm">
-				</div>
-
-				<div class="form-group">
-					<label for="">Téléphone</label>
-					<input wire:model="telephone" type="text" required="" class="form-control form-control-sm">
+				<div class="form-group row container">
+					<label class="col-4" for="">Téléphone</label>
+					<input wire:model="telephone" type="text" required="" class="form-control form-control-sm col-8">
+					@error('telephone')
+					<p class="error text-danger">{{ $message }}</p>
+					@enderror
 				</div>
 
 				<div class="form-group">

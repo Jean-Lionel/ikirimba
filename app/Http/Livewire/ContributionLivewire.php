@@ -20,13 +20,14 @@ class ContributionLivewire extends Component
 	public  $numberPerPage=20;
 
 	public $compte;
+	public $person_name;
 
 	public $searchValue;
 
 
 
 	protected $rules = [
-		'montant' => 'required|min:500|max:10000000|numeric',
+		'montant' => 'required|numeric|min:500|max:1000000',
 		//'compteName' => 'required|exists:comptes,name'
 		'compteName' => 'required',
 		'type_contribution' => 'required'
@@ -72,15 +73,16 @@ class ContributionLivewire extends Component
 				'code_transaction' => $this->getUniqueCode(),
 				'person_id' => $this->compte->membre->id,
 				'compte_id' => $this->compte->id,
-				'type_contribution' => $this->type_contribution
+				'type_contribution' => $this->type_contribution,
+				'person_name' => $this->person_name
 
 			]);
 
-			$compte = $this->compte;
+			// $compte = $this->compte;
 
-			$compte->montant += $this->montant;
+			// $compte->montant += $this->montant;
 
-			$compte->save();
+			// $compte->save();
 
 			DB::commit();
 
@@ -104,6 +106,7 @@ class ContributionLivewire extends Component
 		$this->montant = "";
 		$this->compte = "";
 		$this->compteName = "";
+		$this->person_name = "";
 	}
 
 	public function numberPerPage(){

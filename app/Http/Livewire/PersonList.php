@@ -31,111 +31,135 @@ class PersonList extends Component
     public $searchValue = null;
     private $parentGroupement = [];
 
+
+
+
+    //Modifiecation du membre 
+
+    public $identification;
+    public $first_name;
+    public $last_name;
+    public $cni;
+    public $telephone;
+    public $isUpdate = false;
+
     public function updatingProvinces()
     {
         $this->resetPage();
     }
 
 
-	public function mount(){
+    public function mount(){
 
 		//$this->persons = 
-		$this->provinces = Province::all();
-		$this->communes = collect();
-		$this->collines = collect();
-		$this->groupements = collect();
-	}
+      $this->provinces = Province::all();
+      $this->communes = collect();
+      $this->collines = collect();
+      $this->groupements = collect();
+  }
 
-    public function render()
-    {
-        $searchValue = '%'.$this->searchValue.'%';
-
-        //$persons = Person::latest()->paginate(10);
-         // $persons= Person::where('groupement_id','=', $this->selectedGroupement)
-         //                  ->orWhere('first_name','LIKE',$searchValue)
-         //                  ->orWhere('last_name','LIKE',$searchValue)
-         //                  ->orWhere('cni','LIKE',$searchValue)
-         //                  ->orWhere('telephone','LIKE',$searchValue)->paginate();
-
-        $selected =  array_merge([$this->selectedGroupement], $this->parentGroupement);
-
-        $persons = Person::latest()
-                           ->whereIn('groupement_id', $selected)
-                           ->where(function($query) use ( $searchValue){
-                                    
-                                    if($searchValue !=null){
-                                        $query->where('first_name','LIKE',$searchValue)
-                                      ->orWhere('last_name','LIKE',$searchValue)
-                                      ->orWhere('cni','LIKE',$searchValue)
-                                      ->orWhere('telephone','LIKE',$searchValue)
-                                    ;
-                                    }
-                                
-
-                           })
-                           ->paginate();
-
-        return view('livewire.person-list',
-        	[
-        		'persons' => $persons
-
-        	]
-
-    	);
-    }
+  public function render()
+  {
+    $searchValue = '%'.$this->searchValue.'%';
 
 
-    public function updatedSelectedProvince($province){
+    $selected =  array_merge([$this->selectedGroupement], $this->parentGroupement);
 
-        $this->communes = Commune::where('province_id','=', $province)->get();
+    $persons = Person::where(function($query) use ( $searchValue){
+        if($searchValue !=null){
+            $query->where('first_name','LIKE',$searchValue)
+            ->orWhere('last_name','LIKE',$searchValue)
+            ->orWhere('cni','LIKE',$searchValue)
+            ->orWhere('telephone','LIKE',$searchValue)
+            ;
+        } 
 
-        $collines = Colline::whereIn('commune_id', $this->communes->map->id->toArray())->get();
+    })
+    ->paginate();
 
-        $groupements = Groupement::whereIn('Colline_id', $collines->map->id->toArray())->get();
+    return view('livewire.person-list',
+       [
+          'persons' => $persons
+
+      ]
+
+  );
+}
+
+
+public function updatedSelectedProvince($province){
+
+    $this->communes = Commune::where('province_id','=', $province)->get();
+
+    $collines = Colline::whereIn('commune_id', $this->communes->map->id->toArray())->get();
+
+    $groupements = Groupement::whereIn('Colline_id', $collines->map->id->toArray())->get();
 
         // $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
 
-        $this->parentGroupement = $groupements->map->id->toArray();
+    $this->parentGroupement = $groupements->map->id->toArray();
 
-        $this->selectedGroupement = null;
+    $this->selectedGroupement = null;
 
         // $this->selectCommune = null;
-    }
-    
+}
 
-    public function updatedSelectCommune($colline){
 
-        $this->collines = Colline::where('commune_id','=', $colline)->get();
+public function updatedSelectCommune($colline){
 
-        $groupements = Groupement::whereIn('Colline_id', $this->collines->map->id->toArray())->get();
+    $this->collines = Colline::where('commune_id','=', $colline)->get();
+
+    $groupements = Groupement::whereIn('Colline_id', $this->collines->map->id->toArray())->get();
 
         // $this->persons = Person::whereIn('groupement_id',$groupements->map->id->toArray())->paginate();
 
-        $this->parentGroupement = $groupements->map->id->toArray();
-        $this->selectedGroupement = null;
+    $this->parentGroupement = $groupements->map->id->toArray();
+    $this->selectedGroupement = null;
 
+}
 
+public function updatedSelectColline($colline_id){
 
+    $this->groupements = Groupement::where('colline_id','=', $colline_id)->get();
 
-        // $this->selectColline = null;
-    }
-
-    public function updatedSelectColline($colline_id){
-
-        $this->groupements = Groupement::where('colline_id','=', $colline_id)->get();
-
-       // $this->persons = Person::whereIn('groupement_id',$this->groupements->map->id->toArray())->paginate();
-
-        $this->parentGroupement = $this->groupements->map->id->toArray();
-        $this->selectedGroupement = null;
+    $this->parentGroupement = $this->groupements->map->id->toArray();
+    $this->selectedGroupement = null;
 
 
 
         // $this->selectedGroupement = null;
-    }
+}
 
-    public function updatedSelectedGroupement($groupement){
-    	$this->persons = Person::where('groupement_id','=', $groupement)->paginate();
-    }
+public function updatedSelectedGroupement($groupement){
+   $this->persons = Person::where('groupement_id','=', $groupement)->paginate();
+}
+
+public function modifier($id){
+        // dd($id);
+
+    $person = Person::find($id) ?? new Person;
+
+    $this->identification = $person->id;
+    $this->first_name = $person->first_name;
+    $this->last_name = $person->last_name;
+    $this->cni = $person->cni;
+    $this->telephone = $person->telephone;
+    $this->isUpdate =  true;
+}
+
+public function updatePerson(){
+    $person = Person::find($this->identification );
+
+    $person->id =  $this->identification;
+    $person->first_name =  $this->first_name;
+    $person->last_name = $this->last_name;
+    $person->cni =  $this->cni;
+    $person->telephone =   $this->telephone;
+
+    $person->save();
+
+    $this->isUpdate =  false;
+
+}
 
 }
