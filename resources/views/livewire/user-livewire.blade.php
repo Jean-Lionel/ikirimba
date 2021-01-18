@@ -52,6 +52,20 @@
                 @enderror
     		</div>
 
+            <div class="col-md-4 form-group">
+                <label for="">Rôle</label>
+                <select wire:model="role" id="" class="form-control">
+                    <option value="">Choisissez ici ...</option>
+                    <option value="UTILISATEUR">UTILISATEUR</option>
+                    <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
+
+                </select>
+                @error('email')
+                    <span class="text-danger error">{{ $message }}</span>
+                @enderror
+            </div>
+
+
     		<div class="col-md-4 form-group">
     			<label for="">Mot de pass </label>
     			<input wire:model="password" type="password" class="form-control">

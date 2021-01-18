@@ -1,12 +1,12 @@
 <style type="text/css">
 
 
-    .test-element {
-     /* color: #9ca1b2;*/ /*  2b2d3c */
-     background: #2a2c3b; /* 2f3242  */
-     /* overflow-x: hidden; */
+  .test-element {
+   /* color: #9ca1b2;*/ /*  2b2d3c */
+   background: #2a2c3b; /* 2f3242  */
+   /* overflow-x: hidden; */
 
-     color: #FFF;
+   color: #FFF;
  }
 
 
@@ -34,20 +34,20 @@ body.modal-open {
     -webkit-transition: all 0.25s ease-out;
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
-}
-.row-offcanvas-left .sidebar-offcanvas {
+  }
+  .row-offcanvas-left .sidebar-offcanvas {
     left: -33%;
-}
-.row-offcanvas-left.active {
+  }
+  .row-offcanvas-left.active {
     left: 33%;
     margin-left: -6px;
-}
-.sidebar-offcanvas {
+  }
+  .sidebar-offcanvas {
     position: absolute;
     top: 0;
     width: 33%;
     height: 100%;
-}
+  }
 }
     /*
  * Off Canvas wider at sm breakpoint
@@ -57,14 +57,14 @@ body.modal-open {
  @media screen and (max-width: 34em) {
   .row-offcanvas-left .sidebar-offcanvas {
     left: -45%;
-}
-.row-offcanvas-left.active {
+  }
+  .row-offcanvas-left.active {
     left: 45%;
     margin-left: -6px;
-}
-.sidebar-offcanvas {
+  }
+  .sidebar-offcanvas {
     width: 45%;
-}
+  }
 }
 
 .card {
@@ -96,232 +96,212 @@ body.modal-open {
 <div class="mt-4">
 
   {{-- {{ setActiveRouter('rapport.index') }} --}}
-    <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">×</span>
-        <span class="sr-only">Close</span>
+  <div class="alert alert-warning fade collapse" role="alert" id="myAlert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+      <span class="sr-only">Close</span>
     </button>
-</div>
-
-<div class="row mb-3">
-  <div class="col-xl-3 col-lg-6">
-    <div class="card card-inverse card-success">
-      <div class="card-block bg-success">
-        <div class="rotate">
-          <i class="fa fa-dollar fa-5x"></i>
-      </div>
-      <h6 class="text-uppercase text-center">COMPTE D'ADHESION</h6>
-      
-      <h5 class="d-flex justify-content-around">
-        <i class="fas fa-funnel-dollar"></i>
-        <span> {{ number_format($adhesion) }} #FBU </span>
-         </h5>
   </div>
-</div>
-</div>
-<div class="col-xl-3 col-lg-6">
-    <div class="card card-inverse card-danger">
-      <div class="card-block bg-danger">
-        <div class="rotate">
-          <i class="fa fa-list fa-4x"></i>
-      </div>
-      <div class="">
-        <h6 class="text-uppercase text-center"> MEMBRE EN GENERAL </h6>
-         <h5 class="d-flex justify-content-around">
-          <i class="fas fa-people-carry"></i>  
-          <span>{{ number_format($membreTotal) }}</span>
-        </h5>
-      </div>
-  </div>
-</div>
-</div>
-<div class="col-xl-3 col-lg-6">
-    <div class="card card-inverse card-info">
-      <div class="card-block bg-info">
-        <div class="rotate">
-          <i class="fa fa-shopping-cart fa-5x"></i>
-      </div>
-      <h6 class="text-uppercase text-center">COMPTE DES COTISATION</h6>
-      <h5 class="d-flex justify-content-around">
-        <i class="fas fa-file-invoice-dollar"></i>
-         <span>{{ number_format($contributions)  }} #FBU</span></h5>
-  </div>
-</div>
-</div>
-<div class="col-xl-3 col-lg-6">
-    <div class="card card-inverse card-warning">
-      <div class="card-block bg-warning">
-        <div class="rotate">
-          <i class="fa fa-share fa-5x"></i>
-      </div>
-     
-      <h6 class="text-uppercase">MONTANT TOTAL</h6>
-      
-      <h5 class="d-flex justify-content-around">
-        <i class="fab fa-amazon-pay"></i>
 
-       {{ number_format($contributions + $adhesion) }} #FBU
-      </h5>
-  </div>
-</div>
-
-</div>
-</div>
-
-<div >
-
-  <div class="row">
-    
-
-    <div class="row col-md-12">
-      <div class="col-3"><h4>Liste des membres</h4></div>
-
-      <div class="col-3">
-            <label for="">Province {{ $selectedProvince  }}</label>
-            <select name="" wire:model="selectedProvince" id="" class="form-control form-control-sm">
-              <option value="">Choisissez ....</option>
-
-              @foreach($provinces as $province)
-              <option value="{{ $province->id }}">{{ $province->name }}</option>
-
-              @endforeach
-            </select>
+  <div class="row mb-3">
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-inverse card-success">
+        <div class="card-block bg-success">
+          <div class="rotate">
+            <i class="fa fa-dollar fa-5x"></i>
           </div>
+          <h6 class="text-uppercase text-center">COMPTE D'ADHESION</h6>
+
+          <h5 class="d-flex justify-content-around">
+            <i class="fas fa-funnel-dollar"></i>
+            <span> {{ number_format($adhesion) }} #FBU </span>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-inverse card-danger">
+        <div class="card-block bg-danger">
+          <div class="rotate">
+            <i class="fa fa-list fa-4x"></i>
+          </div>
+          <div class="">
+            <h6 class="text-uppercase text-center"> MEMBRE EN GENERAL </h6>
+            <h5 class="d-flex justify-content-around">
+              <i class="fas fa-people-carry"></i>  
+              <span>{{ number_format($membreTotal) }}</span>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+      <div class="card card-inverse card-info">
+        <div class="card-block bg-info">
+          <div class="rotate">
+            <i class="fa fa-shopping-cart fa-5x"></i>
+          </div>
+          <h6 class="text-uppercase text-center">COMPTE DES COTISATIONS</h6>
+          <h5 class="d-flex justify-content-around">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>{{ number_format($contributions)  }} #FBU</span></h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-6">
+        <div class="card card-inverse card-warning">
+          <div class="card-block bg-warning">
+            <div class="rotate">
+              <i class="fa fa-share fa-5x"></i>
+            </div>
+
+            <h6 class="text-uppercase">MONTANT TOTAL</h6>
+
+            <h5 class="d-flex justify-content-around">
+              <i class="fab fa-amazon-pay"></i>
+
+              {{ number_format($contributions + $adhesion) }} #FBU
+            </h5>
+          </div>
+        </div>
+
+      </div>
 
 
-         
+
 
     </div>
-    <div class="col-md-12">
-      <table class="table-sm table table-hover">
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>N° du membre</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-          </tr>
-          
-        </thead>
 
-        <tbody>
+    <div class="row">
 
-          @foreach($membres as $key => $membre)
-          <tr>
-            <td>{{ ++$key }}</td>
-            <td>{{ $membre->compte->name }}</td>
-            <td>{{ $membre->first_name }}</td>
-            <td>{{ $membre->last_name }}</td>
-          </tr>
+      <div class="col-md-4">
 
-          @endforeach          
-        </tbody>
-      </table>
+        <ul class="list-group">
 
-        {{ $membres->links() }}
- 
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Montant Total des membres
+            <span class="badge-primary badge-pill display-5">{{number_format( $montantTotalDesMembres )}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Dapibus ac facilisis in
+            <span class="badge badge-primary badge-pill">2</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Morbi leo risus
+            <span class="badge badge-primary badge-pill">1</span>
+          </li>
+        </ul>
+        
+
+
+      </div>
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      
     </div>
+
+    <div >
+
+      <div class="row">
+        <div class="col-md-6 test-element">
+          <canvas id="myChart" width="400px"> </canvas>
+        </div>
+        <div class="col-md-6" class="test-element">
+          <canvas id="myChart2" width="400px"></canvas>
+        </div>
+      </div>
+
+    </div>
+
+
   </div>
-  <div class="row">
-    <div class="col-md-6 test-element">
-        <canvas id="myChart" width="400px"> </canvas>
-    </div>
-    <div class="col-md-6" class="test-element">
-      <canvas id="myChart2" width="400px"></canvas>
-    </div>
-  </div>
-    
-</div>
 
 
-</div>
+  @push('scripts')
 
-{{-- 
-@push('scripts')
-
-<script>
+  <script>
     var chartTyp = ['bar','line','pie','scatter'];
 
     var ctx = document.getElementById('myChart').getContext('2d');
     var ctx2 = document.getElementById('myChart2').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3,6],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 120, 0.2)'
-                ],
-                borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 109, 140, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3,6],
+          backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 120, 0.2)'
+          ],
+          borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 109, 140, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
+          }]
         }
+      }
     });
 
     const myChart2 =  new Chart(ctx2, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3,6],
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 159, 120, 0.2)'
-                ],
-                borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(255, 109, 140, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','HEY'],
+        datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3,6],
+          backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 159, 120, 0.2)'
+          ],
+          borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(255, 109, 140, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
             }
+          }]
         }
+      }
     });
-</script>
+  </script>
 
 
-@endpush --}}
+  @endpush

@@ -10,6 +10,7 @@ use App\Models\Groupement;
 use App\Models\Person;
 use App\Models\Province;
 use App\Models\SharedIncome;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -26,6 +27,8 @@ class PersonLivewire extends Component
     public $selectedGroupement = null;
     public $membre = null;
 
+
+    public $showForm = true;
     //Property
 
     public $first_name = "";
@@ -35,13 +38,29 @@ class PersonLivewire extends Component
     public $sexe = "";
     public $montant = "";
     public $parent_code = "";
-   
+    public $code_parrent_indirect = "";
 
+
+    public $confirming;
+
+    public function confirmDelete($id)
+    {
+        $this->confirming = $id;
+    }
+
+   
 
     
     public function render()
     {
-        return view('livewire.person-livewire');
+         // $this->$membreNonApprouver = collect();
+        return view('livewire.person-livewire',
+            [
+
+                // 'membreNonApprouver' => Person::where('approuve','<>',"NON")->get()
+                'membreNonApprouver' => Person::all()
+
+            ]);
     }
 
 
@@ -53,6 +72,7 @@ class PersonLivewire extends Component
         $this->communes = collect();
         $this->collines = collect();
         $this->groupements = collect();
+
         
     }
 
@@ -78,40 +98,42 @@ class PersonLivewire extends Component
 
     private function resetInputFields(){
 
-     $this->first_name = null;
-     $this->last_name = null;
-     $this->telephone = null;
-     $this->cni =null;
+       $this->first_name = null;
+       $this->last_name = null;
+       $this->telephone = null;
+       $this->cni =null;
+       $this->parent_code =null;
+       $this->parrain_inderrect =null;
 
- }
+   }
 
- protected $rules = [
+   protected $rules = [
 
-        'first_name' => 'required',
-        'last_name' => 'required',
-        'telephone' => 'required',
-        'montant' => 'required|numeric|min:15000|max:15000',
- ];
+    'first_name' => 'required',
+    'last_name' => 'required',
+    'telephone' => 'required',
+    'montant' => 'required|numeric|min:15000|max:15000',
+];
 
- private function validateParentCode(){
+private function validateParentCode(){
     if(Compte::all()->count() > 0){
         $this->rules['parent_code'] = 'required|exists:comptes,name';
     }
- }
+}
 
 protected $messages = [
-        'montant.min' => "Le montant d'adhésion est de 15000 FBU",
-        'montant.max' => "Le montant d'adhésion est invalide",
-        'parent_code.exists' => "Le compte est invalide",
-        'parent_code.required' => "Le compte est obligatoire",
-    ];
+    'montant.min' => "Le montant d'adhésion est de 15000 FBU",
+    'montant.max' => "Le montant d'adhésion est invalide",
+    'parent_code.exists' => "Le compte est invalide",
+    'parent_code.required' => "Le compte est obligatoire",
+];
 
- public function updatedMontant(){
+public function updatedMontant(){
     $this->validateOnly($this->montant);
- }
+}
 
 
- public function store(){
+public function store(){
 
     $this->validateParentCode();
     $this->validate();
@@ -120,89 +142,90 @@ protected $messages = [
 
     if($this->checkNumberEnfant()){
 
-    try {
+        try {
 
-        DB::beginTransaction();
+            DB::beginTransaction();
 
-        $compte = Compte::where('name','=',$this->parent_code)->first();
+            $compte = Compte::where('name','=',$this->parent_code)->first();
 
-        $personne = Person::create([
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'sexe' => $this->sexe,
-            'telephone' => $this->telephone,
-            'montant' => $this->montant,
+            $personne = Person::create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'sexe' => $this->sexe,
+                'telephone' => $this->telephone,
+                'montant' => $this->montant,
+                'approuve' => "NON",
             'code_parrent' => $compte->person_id ?? null,//$this->getUniqueCode(),
+            'code_parrent_indirect' => $this->code_parrent_indirect,
             'groupement_id' => $this->selectedGroupement
 
         ]);
 
-        $compte = Compte::create([
-            'name' => $this->getUniqueAcountName(),
-            'montant' => 0,
-            'person_id' =>  $personne->id
+            $compte = Compte::create([
+                'name' => $this->getUniqueAcountName(),
+                'montant' => 0,
+                'person_id' =>  $personne->id
 
-        ]);
+            ]);
 
-        $this->sharedContribution($personne);
+            $this->membre = $personne;
 
-        $this->membre = $personne;
+            DB::commit();
+            $this->resetInputFields();
+            
+            session()->flash('message',"Enregistrement réussi");
 
-        DB::commit();
-         $this->resetInputFields();
-        session()->flash('message',"Enregistrement réussi");
-        
-    } catch (\Exception $e) {
+        } catch (\Exception $e) {
 
         //dd($e->getMessage());
-        DB::rollback();
+            DB::rollback();
 
-        session()->flash('error',$e->getMessage());
-   }
+            session()->flash('error',$e->getMessage());
+        }
 
     }
 
 }
-   
+
     //Verifier que le membre a le doit d'ajouter le nouveau adherant
 
-    private function checkNumberEnfant(){
-        
-        $compte = Compte::where('name','=',$this->parent_code)->first();
+private function checkNumberEnfant(){
 
-        if($compte == null and Compte::all()->count()){
-            session()->flash('error',"Le numéro de compte n'existe pas" );
+    $compte = Compte::where('name','=',$this->parent_code)->first();
 
-            return false;
-        }
-        if($compte !== null && $compte->membre->nombre_enfant_dirrect == 5){
-            session()->flash('error',"Vous avez déjà attient le nombre maximum " );
-            return false;
-        }
+    if($compte == null and Compte::all()->count()){
+        session()->flash('error',"Le numéro de compte n'existe pas" );
 
-        return true;
+        return false;
+    }
+    if($compte !== null && $compte->membre->nombre_enfant_dirrect == 5){
+        session()->flash('error',"Vous avez déjà attient le nombre maximum " );
+        return false;
     }
 
-    private function sharedContribution($enfant){
-        
-        $montant = $this->montant;
-        $montant_caisse = $this->montant;
+    return true;
+}
+
+private function sharedContribution($enfant){
+
+    $montant = $enfant->montant;
+    $montant_caisse = $enfant->montant;
 
         //Pour le premier recoit 1/5
 
-        $parent = Person::find($enfant->code_parrent);
+    $parent = Person::find($enfant->code_parrent);
 
 
 
-        if($parent !== null){
+    if($parent !== null){
             //dd( $parent );
             $m = $montant/ 5; // 15000 /5 = 3000
             $parent->compte->montant += $m;
             $parent->compte->save();
             //On diminuer la somme
 
-             $parent->nombre_enfant_dirrect +=1;
-             $parent->save();
+            $parent->nombre_enfant_dirrect +=1;
+            $parent->save();
 
            // dd($parent->compte);
             $montant_caisse -=  $m ;
@@ -223,16 +246,16 @@ protected $messages = [
             }
 
  // $montant_caisse
-           
+
 
         }
 
-         Adhesion::create([
-                'person_id' => $enfant->id,
-                'compte_name' => $enfant->compte->name,
-                'montant' => $montant_caisse,
+        Adhesion::create([
+            'person_id' => $enfant->id,
+            'compte_name' => $enfant->compte->name,
+            'montant' => $montant_caisse,
                 // 'montant' => $enfant->montant_caisse,
-            ]);
+        ]);
 
 
         //Les autres 5 rocoit 1 /10
@@ -246,45 +269,101 @@ protected $messages = [
     private function getUniqueCode()
     {
         //Person::where('unique_code','=', '')->first()
-         $genKey = unique_code_membre();
-        while (Person::where('unique_code','=', $genKey)->first()) {
-            $genKey = unique_code_membre();
-            
-        }
-        return  $genKey;
+       $genKey = unique_code_membre();
+       while (Person::where('unique_code','=', $genKey)->first()) {
+        $genKey = unique_code_membre();
+
     }
+    return  $genKey;
+}
 
-    private function getUniqueAcountName()
-    {
-       $genName = code_name();
+private function getUniqueAcountName()
+{
+ $genName = code_name();
 
-       $i = 0;
+ $i = 0;
 
-        while (Compte::where('name','=', $genName)->first()) {
-            $genName = code_name();
-             $i++;
+ while (Compte::where('name','=', $genName)->first()) {
+    $genName = code_name();
+    $i++;
 
              //Si on arrive a 10 tours sans trouver le resultat on ajouter une
              //On ajoute le prefixe
-             if($i >=1000)
-             {
-                $genName = rand(0, 999).'-'.$genName;
-             }
-            
+    if($i >=1000)
+    {
+        $genName = rand(0, 999).'-'.$genName;
+    }
+
+}
+
+return $genName;
+
+}
+
+public function saveSharedMontant($enfant,$parent , $montant){
+   SharedIncome::create([
+    'compte_dep' => $enfant->compte->name,
+    'compte_rec' => $parent->compte->name,
+    'montant' => $montant
+]);
+
+   return true;
+}
+
+
+public function approuverEnregistrement($membre){
+
+    try {
+        DB::beginTransaction();
+
+        $personne = Person::find($membre);
+        $personne->approuve = Carbon::now();
+
+        $personne->save();
+        $this->sharedContribution($personne);
+
+        if($personne->code_parrent_indirect){
+            // Search For TWo Parent 
+            // Uwamuzanye hamwe nuwo yamuzaniye
+            $parrain_inderrect = Person::getPersonneByCompteName($personne->code_parrent_indirect);
+            $parrain_dirrect = Person::getPersonneById($personne->code_parrent);
+
+            //Enlevement de 1500 pour le parrant qui n'a pas travailler
+            $parrain_dirrect->compte->montant -= 1500;
+            $parrain_inderrect->compte->montant += 1500;
+
+            $this->saveSharedMontant($parrain_dirrect->compte->name, $parrain_inderrect->compte->name, 1500 );
+
+            $parrain_dirrect->compte->save();
+            $parrain_inderrect->compte->save();
+
         }
 
-       return $genName;
-        
+        DB::commit();
+
+    } catch (\Exception $e) {
+        DB::rollback();
+        dump($e->getMessage());
     }
 
-    public function saveSharedMontant($enfant,$parent , $montant){
-         SharedIncome::create([
-                'compte_dep' => $enfant->compte->name,
-                'compte_rec' => $parent->compte->name,
-                'montant' => $montant
-            ]);
+    return back();
+}
 
-         return true;
-    }
+
+public function refuserEnregistrement($id)
+{
+ 
+
+  try {
+     $mbre = Person::find($id);
+      $mbre->compte->delete();
+      $mbre->delete();
+  } catch (\Exception $e) {
+
+    dump($e->getMessage());
+      
+  }
+  return back();  
+}
 
 }

@@ -29,6 +29,7 @@ class User extends Authenticatable
         'password',
         'username',
         'description',
+        'role',
     ];
 
     /**
@@ -64,6 +65,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return true;
+        return $this->role === "ADMINISTRATEUR";
+    }
+
+    public function isSimpleUser()
+    {
+         return $this->role === "UTILISATEUR";
     }
 }

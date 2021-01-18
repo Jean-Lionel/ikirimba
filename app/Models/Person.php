@@ -34,4 +34,17 @@ class Person extends Model
             $model->user_id = Auth::user()->id;
         });
     }
+
+    public static function  getPersonneById($d) : Person
+    {
+       return Person::find($d) ?? new Person;  
+    }
+
+    public static function getPersonneByCompteName($compteName) : Person 
+    {
+        $compte = Compte::where('name', '=',$compteName)->first();
+
+        return $compte->membre ?? new Person;
+
+    }
 }

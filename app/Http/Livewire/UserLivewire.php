@@ -17,6 +17,7 @@ class UserLivewire extends Component
 	public $name;
 	public $email;
 	public $username;
+    public $role;
 	public $description;
 	public $password;
     public $identification;
@@ -58,6 +59,7 @@ class UserLivewire extends Component
                 'name' => $this->name,
                 'username' => $this->username,
                 'email' => $this->email,
+                'role' => $this->role,
                 'description' => $this->description,
                 'password' => Hash::make($this->password),
 
@@ -69,6 +71,7 @@ class UserLivewire extends Component
             'name' => $this->name,
             'username' => $this->username,
             'email' => $this->email,
+            'role' => $this->role,
             'description' => $this->description,
             'password' => Hash::make($this->password),
           ]);

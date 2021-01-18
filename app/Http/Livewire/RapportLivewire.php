@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Adhesion;
 use App\Models\Colline;
 use App\Models\Commune;
+use App\Models\Compte;
 use App\Models\Contribution;
 use App\Models\Groupement;
 use App\Models\Person;
@@ -16,16 +17,15 @@ use Livewire\WithPagination;
 class RapportLivewire extends Component
 {
 
-    use WithPagination;
-    protected $paginationTheme = 'bootstrap';
+    
 	
     public $adhesion;
     public $membreTotal;
     public $contributions;
     public $jour;
     public $montantJour;
-    public $provinces;
-    public $selectedProvince;
+    public $montantTotalDesMembres;
+
 
 
 
@@ -34,6 +34,9 @@ class RapportLivewire extends Component
     	$this->adhesion = Adhesion::all()->sum('montant');
     	$this->membreTotal = Person::all()->count();
         $this->provinces = Province::all();
+        $this->montantTotalDesMembres = Compte::all()->sum('montant');
+
+
         $this->contributions = Contribution::all()->sum('montant');
         $readings = DB::table('adhesions')
         ->whereDate('created_at', '>=', now()->subDays(7))

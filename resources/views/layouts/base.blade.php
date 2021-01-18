@@ -70,6 +70,8 @@
           {{-- <li class="nav-item active">
             <a class="nav-link" href="#">ACCUEIL <span class="sr-only">(current)</span></a>
           </li> --}}
+
+          @can('is-admin')
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('people.index') }}" href="{{ route('people.index') }}"><i class='fas fa-user-friends' style='font-size:24px'></i>MEMBRE</a>
           </li>
@@ -85,6 +87,8 @@
             </div>
           </li>
 
+          @endcan
+
            <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('contributions.index') }}" href="{{ route('contributions.index') }}"> <i class="   fas fa-money-check-alt"></i>Contribution</a>
           </li>
@@ -92,6 +96,8 @@
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('people.create') }}" href="{{ route('people.create') }}"> <i class="fas fa-book-open"></i> Adhésion dans L.C.P.C</a>
           </li>
+
+          @can('is-admin')
 
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="  fas fa-chart-line"></i>Rapport</a>
@@ -101,6 +107,8 @@
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="  fas fa-user-cog"></i>Utilisateur</a>
           </li>
+
+          @endcan
 
 
         </ul>
