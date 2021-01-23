@@ -233,18 +233,18 @@
 					<td>
 						<ul class="list-group">
 							<li class="list-group-item">
-								Groupement :{{$membre->groupement->name  }}
+								Groupement :{{$membre->groupement->name ?? ""  }}
 							</li>
 							<li class="list-group-item">
-								Colline :{{$membre->groupement->colline->name  }}
-							</li>
-
-							<li class="list-group-item">
-								Commune :{{$membre->groupement->colline->commune->name  }}
+								Colline :{{$membre->groupement->colline->name ?? ""  }}
 							</li>
 
 							<li class="list-group-item">
-								Province :{{$membre->groupement->colline->commune->province->name  }}
+								Commune :{{$membre->groupement->colline->commune->name ?? ""  }}
+							</li>
+
+							<li class="list-group-item">
+								Province :{{$membre->groupement->colline->commune->province->name  ?? "" }}
 							</li>
 						</ul>
 					</td>
@@ -268,7 +268,7 @@
 								PARRANT INDIRRECT <br>
 
 								Nom et Prénom :
-								{{$parent_2->first_name .' '.$parent_2->last_name }}
+								{{$parent_2->first_name ?? "".' '.$parent_2->last_name ?? ""}}
 								<br>
 
 								NUMERO : {{ $parent_2->compte->name ?? "" }}
