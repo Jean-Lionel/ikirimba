@@ -16,19 +16,12 @@ use Livewire\WithPagination;
 
 class RapportLivewire extends Component
 {
-
-    
-	
     public $adhesion;
     public $membreTotal;
     public $contributions;
     public $jour;
     public $montantJour;
     public $montantTotalDesMembres;
-
-
-
-
 
     public function mount(){
     	$this->adhesion = Adhesion::all()->sum('montant');
@@ -67,22 +60,9 @@ class RapportLivewire extends Component
 }
 
 
-
     private function contributionForSevenDay(){
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

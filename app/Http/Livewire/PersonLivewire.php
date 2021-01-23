@@ -169,7 +169,6 @@ public function store(){
             ]);
 
             $this->membre = $personne;
-
             DB::commit();
             $this->resetInputFields();
             

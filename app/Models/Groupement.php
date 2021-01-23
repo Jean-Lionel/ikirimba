@@ -17,4 +17,9 @@ class Groupement extends Model
     {
     	return $this->belongsTo('App\Models\Colline','colline_id','id');
     }
+
+    public function people()
+    {
+    	return $this->hasMany(Person::class);
+    }
 }

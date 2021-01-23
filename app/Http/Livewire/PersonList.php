@@ -31,9 +31,6 @@ class PersonList extends Component
     public $searchValue = null;
     private $parentGroupement = [];
 
-
-
-
     //Modifiecation du membre 
 
     public $identification;
@@ -61,7 +58,6 @@ class PersonList extends Component
   public function render()
   {
     $searchValue = '%'.$this->searchValue.'%';
-
 
     $selected =  array_merge([$this->selectedGroupement], $this->parentGroupement);
 

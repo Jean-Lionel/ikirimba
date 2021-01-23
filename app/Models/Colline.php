@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Commune;
+use App\Models\Groupement;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,5 +16,10 @@ class Colline extends Model
     public function commune()
     {
     	return $this->belongsTo(Commune::class);
+    }
+
+    public function groupements()
+    {
+    	return $this->hasMany(Groupement::class);
     }
 }

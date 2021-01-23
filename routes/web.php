@@ -48,6 +48,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::resource('collines', CollineController::class);
 	Route::resource('groupements', GroupementController::class);
 	Route::resource('people', PersonController::class);
+	Route::get('member-list', [PersonController::class , 'memberListe'])->name('memberListe');
 	
 	Route::resource('contributions', ContributionController::class);
 

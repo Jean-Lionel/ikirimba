@@ -10,7 +10,6 @@
     	<div class="col-md-12">
     		<div class="row">
     			
-
                 <div class="col-md-3 col-sm-6">
                     <label for="">Rechercher</label>
                    <input type="text" wire:model="searchValue" placeholder="Saisissez ici" class="form-control">
@@ -88,7 +87,6 @@
                         </td>
     				
     				</tr>
-
 
     				@endforeach
 

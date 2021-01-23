@@ -34,6 +34,11 @@ class PersonController extends Controller
         return view('people.create');
     }
 
+    public function memberListe()
+    {
+        return view('people.show');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
