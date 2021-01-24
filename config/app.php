@@ -2,6 +2,10 @@
 
 return [
 
+    /*NOMBRE DES ECHELLE PAR DEFAULT */
+
+    'LIMITE_MEMBER' => env('LIMITE_MEMBER', 5),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

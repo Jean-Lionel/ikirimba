@@ -20,7 +20,18 @@ class PersonController extends Controller
     {
        //dd( Gate::allows('create-person'));
        $this->authorize('create-person');
-        
+
+       $person = Person::find(2);
+
+       dump(LIMITE_MEMBER);
+
+
+
+       dump($person->simblings()->pluck('first_name','last_name'));
+       dump($person->findPersonWithMinChild());
+       // dump($person->simblings()->map->first_name);
+       // dump($person->parentDirect()->first_name ?? "");
+
         return view('people.index');
     }
 

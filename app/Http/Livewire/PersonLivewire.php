@@ -47,19 +47,14 @@ class PersonLivewire extends Component
     {
         $this->confirming = $id;
     }
-
-   
-
     
     public function render()
     {
          // $this->$membreNonApprouver = collect();
         return view('livewire.person-livewire',
             [
-
                 // 'membreNonApprouver' => Person::where('approuve','<>',"NON")->get()
                 'membreNonApprouver' => Person::all()
-
             ]);
     }
 
@@ -98,16 +93,16 @@ class PersonLivewire extends Component
 
     private function resetInputFields(){
 
-       $this->first_name = null;
-       $this->last_name = null;
-       $this->telephone = null;
-       $this->cni =null;
-       $this->parent_code =null;
-       $this->parrain_inderrect =null;
+     $this->first_name = null;
+     $this->last_name = null;
+     $this->telephone = null;
+     $this->cni =null;
+     $this->parent_code =null;
+     $this->parrain_inderrect =null;
 
-   }
+ }
 
-   protected $rules = [
+ protected $rules = [
 
     'first_name' => 'required',
     'last_name' => 'required',
@@ -116,7 +111,7 @@ class PersonLivewire extends Component
 ];
 
 private function validateParentCode(){
-    if(Compte::all()->count() > 0){
+    if(Compte::all()->count() > 5){
         $this->rules['parent_code'] = 'required|exists:comptes,name';
     }
 }
@@ -141,7 +136,6 @@ public function store(){
     //Si le membre ne depasser pas 5 enfant
 
     if($this->checkNumberEnfant()){
-
         try {
 
             DB::beginTransaction();
@@ -178,14 +172,11 @@ public function store(){
 
         //dd($e->getMessage());
             DB::rollback();
-
             session()->flash('error',$e->getMessage());
         }
-
     }
 
 }
-
     //Verifier que le membre a le doit d'ajouter le nouveau adherant
 
 private function checkNumberEnfant(){
@@ -198,6 +189,19 @@ private function checkNumberEnfant(){
         return false;
     }
     if($compte !== null && $compte->membre->nombre_enfant_dirrect == 5){
+        //Si le nombre d'enfant est egale a 5
+        // On cherche dans ces frere le plus jeunes 
+        //SI tout ces freres on les 5
+        // On chercher danse ces enfants direct
+        //si non on remonte dans le systeme
+
+        $person = $compte->membre;
+
+       // $this->code_parrent_indirect = 
+
+        
+
+
         session()->flash('error',"Vous avez déjà attient le nombre maximum " );
         return false;
     }
@@ -210,11 +214,9 @@ private function sharedContribution($enfant){
     $montant = $enfant->montant;
     $montant_caisse = $enfant->montant;
 
-        //Pour le premier recoit 1/5
+    //Pour le premier recoit 1/5
 
     $parent = Person::find($enfant->code_parrent);
-
-
 
     if($parent !== null){
             //dd( $parent );
@@ -239,13 +241,10 @@ private function sharedContribution($enfant){
                 $parent->compte->save();
                 $this->saveSharedMontant($enfant, $parent, $m);
                 $limite++; //incrementation
-
-                $this->saveSharedMontant($enfant, $parent, $montant_gagne);
-                
+                $this->saveSharedMontant($enfant, $parent, $montant_gagne);   
             }
 
  // $montant_caisse
-
 
         }
 
@@ -268,8 +267,8 @@ private function sharedContribution($enfant){
     private function getUniqueCode()
     {
         //Person::where('unique_code','=', '')->first()
-       $genKey = unique_code_membre();
-       while (Person::where('unique_code','=', $genKey)->first()) {
+     $genKey = unique_code_membre();
+     while (Person::where('unique_code','=', $genKey)->first()) {
         $genKey = unique_code_membre();
 
     }
@@ -278,11 +277,11 @@ private function sharedContribution($enfant){
 
 private function getUniqueAcountName()
 {
- $genName = code_name();
+   $genName = code_name();
 
- $i = 0;
+   $i = 0;
 
- while (Compte::where('name','=', $genName)->first()) {
+   while (Compte::where('name','=', $genName)->first()) {
     $genName = code_name();
     $i++;
 
@@ -300,13 +299,13 @@ return $genName;
 }
 
 public function saveSharedMontant($enfant,$parent , $montant){
-   SharedIncome::create([
+ SharedIncome::create([
     'compte_dep' => $enfant->compte->name,
     'compte_rec' => $parent->compte->name,
     'montant' => $montant
 ]);
 
-   return true;
+ return true;
 }
 
 
@@ -351,18 +350,17 @@ public function approuverEnregistrement($membre){
 
 public function refuserEnregistrement($id)
 {
- 
 
   try {
-     $mbre = Person::find($id);
-      $mbre->compte->delete();
-      $mbre->delete();
-  } catch (\Exception $e) {
+   $mbre = Person::find($id);
+   $mbre->compte->delete();
+   $mbre->delete();
+} catch (\Exception $e) {
 
     dump($e->getMessage());
-      
-  }
-  return back();  
+
+}
+return back();  
 }
 
 }

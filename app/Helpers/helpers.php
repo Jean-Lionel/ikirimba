@@ -1,5 +1,10 @@
 <?php
 
+//Constante le nombre Max
+
+define('LIMITE_MEMBER',5);
+
+
 
 //La function generer le numero unique 
 function unique_code_membre($limit = 13)
@@ -35,3 +40,5 @@ function setActiveRouter($route){
 
 	return Route::is($route) ? 'active' : '';
 }
+
+

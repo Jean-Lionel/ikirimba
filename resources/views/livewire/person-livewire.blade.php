@@ -169,7 +169,7 @@
 					
 				</div>
 
-				<div class="form-group row container">
+				{{-- <div class="form-group row container">
 					<label class="col-8" for="">Numéro du Indirrect</label>
 
 					<input type="text" class="col-4" wire:model="code_parrent_indirect">
@@ -178,7 +178,7 @@
 					<p class="error text-danger">{{ $message }}</p>
 					@enderror
 					
-				</div>
+				</div> --}}
 
 
 				<div class="form-group row container">
