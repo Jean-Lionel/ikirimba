@@ -53,8 +53,8 @@ class PersonLivewire extends Component
          // $this->$membreNonApprouver = collect();
         return view('livewire.person-livewire',
             [
-                // 'membreNonApprouver' => Person::where('approuve','<>',"NON")->get()
-                'membreNonApprouver' => Person::all()
+                'membreNonApprouver' => Person::where('approuve','=',"NON")->get()
+                //'membreNonApprouver' => Person::all()
             ]);
     }
 
@@ -93,16 +93,16 @@ class PersonLivewire extends Component
 
     private function resetInputFields(){
 
-     $this->first_name = null;
-     $this->last_name = null;
-     $this->telephone = null;
-     $this->cni =null;
-     $this->parent_code =null;
-     $this->parrain_inderrect =null;
+       $this->first_name = null;
+       $this->last_name = null;
+       $this->telephone = null;
+       $this->cni =null;
+       $this->parent_code =null;
+       $this->parrain_inderrect =null;
 
- }
+   }
 
- protected $rules = [
+   protected $rules = [
 
     'first_name' => 'required',
     'last_name' => 'required',
@@ -135,7 +135,6 @@ public function store(){
 
     //Si le membre ne depasser pas 5 enfant
 
-    if($this->checkNumberEnfant()){
         try {
 
             DB::beginTransaction();
@@ -174,7 +173,7 @@ public function store(){
             DB::rollback();
             session()->flash('error',$e->getMessage());
         }
-    }
+   
 
 }
     //Verifier que le membre a le doit d'ajouter le nouveau adherant
@@ -199,9 +198,6 @@ private function checkNumberEnfant(){
 
        // $this->code_parrent_indirect = 
 
-        
-
-
         session()->flash('error',"Vous avez déjà attient le nombre maximum " );
         return false;
     }
@@ -209,14 +205,55 @@ private function checkNumberEnfant(){
     return true;
 }
 
-private function sharedContribution($enfant){
 
-    $montant = $enfant->montant;
-    $montant_caisse = $enfant->montant;
+private function partagerLesRevenu($enfant)
+{
+     $parent = $enfant->parentDirect();
+
+     //Trois cas sont possible
+     // 1 Le parent est vide
+     // 2 Le parent a deja recu les 5 enfants
+     // 3 le parent n'a pas encore recu les 5 enfant
+    
+     if($parent and $parent->nombre_enfant_dirrect < LIMITE_MEMBER){
+
+        $this->sharedContribution($enfant, $parent, $enfant->montant);
+
+     }else if($parent and $parent->nombre_enfant_dirrect >= LIMITE_MEMBER){
+       
+        $this->saveSharedMontant($enfant, $parent, 1500);
+
+        $montant  = $enfant->montant - 1500;
+
+        if($parent->findPersonWithMinChild())
+        {
+           $p = $parent->findPersonWithMinChild();
+           $this->sharedContribution($enfant, $p, $montant);
+        }else{
+            $p = $enfant->findPersonWithMinChild();
+            $this->sharedContribution($enfant, $p, $montant);
+
+            if($p == null){
+               throw new Exception("Vous n'avez pas le droit d'ajouter un membre dans votre famillle", 1);
+         }
+
+        }
+     }else if($parent == null){
+
+        $this->sharedContribution($enfant, null, $enfant->montant);
+     }
+
+
+}
+
+
+
+private function sharedContribution($enfant, $parent, $montant){
+
+    // $montant = $enfant->montant;
+    $montant_caisse = $montant;
 
     //Pour le premier recoit 1/5
-
-    $parent = Person::find($enfant->code_parrent);
 
     if($parent !== null){
             //dd( $parent );
@@ -224,17 +261,20 @@ private function sharedContribution($enfant){
             $parent->compte->montant += $m;
             $parent->compte->save();
             //On diminuer la somme
-
+            //on n'augmente le nombre d'enfant
             $parent->nombre_enfant_dirrect +=1;
             $parent->save();
 
            // dd($parent->compte);
             $montant_caisse -=  $m ;
+
+            //On verifier que le personne n'a pas recu les 5 enfants
+
             $this->saveSharedMontant($enfant, $parent, $m);
 
             $limite = 1;
 
-            while ($parent = Person::find($parent->code_parrent) and $limite <= 5) {
+            while ($parent = Person::find($parent->code_parrent) and $limite <= LIMITE_MEMBER) {
                 $montant_gagne = $montant / 10; //15000 / 10 = 1500
                 $parent->compte->montant += $montant_gagne;
                 $montant_caisse -=  $montant_gagne ;
@@ -277,11 +317,9 @@ private function sharedContribution($enfant){
 
 private function getUniqueAcountName()
 {
-   $genName = code_name();
-
-   $i = 0;
-
-   while (Compte::where('name','=', $genName)->first()) {
+ $genName = code_name();
+ $i = 0;
+ while (Compte::where('name','=', $genName)->first()) {
     $genName = code_name();
     $i++;
 
@@ -299,13 +337,13 @@ return $genName;
 }
 
 public function saveSharedMontant($enfant,$parent , $montant){
- SharedIncome::create([
+   SharedIncome::create([
     'compte_dep' => $enfant->compte->name,
     'compte_rec' => $parent->compte->name,
     'montant' => $montant
 ]);
 
- return true;
+   return true;
 }
 
 
@@ -313,29 +351,12 @@ public function approuverEnregistrement($membre){
 
     try {
         DB::beginTransaction();
-
         $personne = Person::find($membre);
         $personne->approuve = Carbon::now();
 
         $personne->save();
-        $this->sharedContribution($personne);
 
-        if($personne->code_parrent_indirect){
-            // Search For TWo Parent 
-            // Uwamuzanye hamwe nuwo yamuzaniye
-            $parrain_inderrect = Person::getPersonneByCompteName($personne->code_parrent_indirect);
-            $parrain_dirrect = Person::getPersonneById($personne->code_parrent);
-
-            //Enlevement de 1500 pour le parrant qui n'a pas travailler
-            $parrain_dirrect->compte->montant -= 1500;
-            $parrain_inderrect->compte->montant += 1500;
-
-            $this->saveSharedMontant($parrain_dirrect->compte->name, $parrain_inderrect->compte->name, 1500 );
-
-            $parrain_dirrect->compte->save();
-            $parrain_inderrect->compte->save();
-
-        }
+        $this->partagerLesRevenu($personne);
 
         DB::commit();
 
@@ -352,10 +373,10 @@ public function refuserEnregistrement($id)
 {
 
   try {
-   $mbre = Person::find($id);
-   $mbre->compte->delete();
-   $mbre->delete();
-} catch (\Exception $e) {
+     $mbre = Person::find($id);
+     $mbre->compte->delete();
+     $mbre->delete();
+ } catch (\Exception $e) {
 
     dump($e->getMessage());
 

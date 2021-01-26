@@ -74,12 +74,10 @@ class Person extends Model
 
     //Trouver le membre dans le lieu parante avec moins des 
     //enfants Entre les freres ou dans les enfants
-
-
+    
     public function findPersonWithMinChild()
     {
         
-
          $frere = $this->simblings()->filter(function ($item) {
                 return $item->nombre_enfant_dirrect < 5;
              });

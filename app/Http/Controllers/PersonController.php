@@ -21,14 +21,15 @@ class PersonController extends Controller
        //dd( Gate::allows('create-person'));
        $this->authorize('create-person');
 
-       $person = Person::find(2);
+       // $person = Person::find(20);
 
-       dump(LIMITE_MEMBER);
+      
+       // foreach ($person->simblings() as $key => $value) {
+       //     # code...
+       //   dump($value->first_name .' ' . $value->nombre_enfant_dirrect);
+       // }
 
-
-
-       dump($person->simblings()->pluck('first_name','last_name'));
-       dump($person->findPersonWithMinChild());
+       // dump($person->findPersonWithMinChild()->toArray());
        // dump($person->simblings()->map->first_name);
        // dump($person->parentDirect()->first_name ?? "");
 

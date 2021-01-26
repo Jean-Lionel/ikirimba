@@ -28,8 +28,7 @@ class CreatePeopleTable extends Migration
             //$table->string('unique_code')->unique();
             $table->float('nombre_enfant_dirrect')->default(0);
             $table->string('code_parrent')->nullable();
-            $table->double('montant')->nullable();
-
+           
             $table->foreignId('groupement_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();

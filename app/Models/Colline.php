@@ -22,4 +22,15 @@ class Colline extends Model
     {
     	return $this->hasMany(Groupement::class);
     }
+
+
+   //  public function  groupementsIds()
+   // {
+        
+   //      $collines = Colline::where('commune_id', $this->id )->get()->map->id->toArray();
+   //      $groupements = Groupement::whereIn('colline_id', $collines)->get()->map->id->toArray();
+
+   //      return $groupements;
+        
+   //  }
 }

@@ -3,7 +3,7 @@
 
     <div class="row">
     	<div class="col">
-    		Province
+    		Province <br>
 
     		<select wire:model="selectedProvince" name="" id="">
     			<option value="">Choisissez</option>
@@ -17,9 +17,7 @@
     		{{-- {{ $selectedProvince }} --}}
     	</div>
     	<div class="col">
-    		Commune
-
-
+    		Commune <br>
     		<select wire:model="selectCommune" name="" id="">
     			<option value="">Choisissez</option>
     			@foreach($communes as $commune)
@@ -42,10 +40,19 @@
     		</select>
     	</div>
     	<div class="col">
-    		Groupement
+    		Groupement <br>
+            <select wire:model="selectGroupement" name="" id="">
+                <option value="">Choisissez</option>
+                @foreach($groupements as $groupement)
+                <option value="{{ $groupement->id }}">
+                    {{ $groupement->name }}
+                </option>
+                @endforeach
+            </select>
     	</div>
     	<div class="col">
-    		Nom et prénom
+    		Nom et prénom <br>
+            <input type="text" wire:model="searchKey">
     	</div>
     	
     </div>
@@ -55,6 +62,7 @@
     		<thead>
     			<tr>
     				<th>Numéro</th>
+                    <th>Compte du Membre</th>
     				<th>Nom et Prénom</th>
     				<th>Groupement de base</th>
     				<th>Date</th>
@@ -62,10 +70,11 @@
     		</thead>
 
     		<tbody>
-    			@foreach($personnes as $personne)
+    			@foreach($personnes as $key=> $personne)
 
     			<tr>
-    				<td>{{ $personne->id }}</td>
+    				<td>{{ ++$key }}</td>
+                    <td>{{ $personne->compte->name }}</td>
     				<td>{{ $personne->fullName }}</td>
     				<td>{{ $personne->groupement->name }}</td>
     				
@@ -75,6 +84,7 @@
     			@endforeach
     		</tbody>
     	</table>
+        {{ $personnes->links()}}
 
 
     </div>
