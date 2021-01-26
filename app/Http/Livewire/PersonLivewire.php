@@ -228,9 +228,15 @@ private function partagerLesRevenu($enfant)
         if($parent->findPersonWithMinChild())
         {
            $p = $parent->findPersonWithMinChild();
+
+           $enfant->code_parrent = $p->id;
+           $enfant->save();
            $this->sharedContribution($enfant, $p, $montant);
         }else{
             $p = $enfant->findPersonWithMinChild();
+             
+             $enfant->code_parrent = $p->id;
+             $enfant->save();
             $this->sharedContribution($enfant, $p, $montant);
 
             if($p == null){
@@ -242,8 +248,7 @@ private function partagerLesRevenu($enfant)
 
         $this->sharedContribution($enfant, null, $enfant->montant);
      }
-
-
+     
 }
 
 
