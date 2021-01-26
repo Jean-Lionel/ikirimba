@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function(){
 	
 	Route::resource('contributions', ContributionController::class);
 
+	
+
 	Route::resource('rapport', RapportController::class);
 	Route::resource('users', UserController::class);
 

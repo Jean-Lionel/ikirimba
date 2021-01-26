@@ -202,7 +202,14 @@ body.modal-open {
 
 
       </div>
-      <div class="col-md-4"></div>
+      <div class="col-md-4">
+
+         <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="{{ route('rapport.create') }}">Information des comptes</a>
+            <span class="badge-primary badge-pill display-5"> <i class="fas fa-list"></i> </span>
+          </li>
+
+      </div>
       <div class="col-md-4"></div>
       
     </div>

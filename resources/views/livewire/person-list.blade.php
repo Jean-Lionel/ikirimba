@@ -9,16 +9,65 @@
     	</div>
     	<div class="col-md-12">
     		<div class="row">
+
+                 @if(!$isUpdate)
     			
                 <div class="col-md-3 col-sm-6">
                     <label for="">Rechercher</label>
                    <input type="text" wire:model="searchValue" placeholder="Saisissez ici" class="form-control">
                 </div>
 
+                @endif
 
     		</div>
 
             @if($isUpdate)
+            <div class="row">
+                <div class="col">
+        
+                    <label for="">Province</label>
+                    <select wire:model="selectedProvince" class="form-control  form-control-sm">
+                        <option value="" selected>Choisissez une provinces</option>
+                        @foreach($provinces as $province)
+                        <option value="{{ $province->id }}">{{ $province->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+
+                    <label for="">Commune</label>
+                    <select wire:model="selectCommune" class="form-control  form-control-sm">
+                        <option value="" selected>Choisissez une commune</option>
+                        @foreach($communes as $commune)
+                        <option value="{{ $commune->id }}">{{ $commune->name }}</option>
+                        @endforeach
+                    </select>
+                    
+
+                </div>
+                <div class="col">
+
+                     <label for="">Colline</label>
+                    <select wire:model="selectColline" class="form-control  form-control-sm">
+                        <option value="" selected>Choisissez une colline</option>
+                        @foreach($collines as $colline)
+                        <option value="{{ $colline->id }}">{{ $colline->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+
+                      <label for="">Groupement de base</label>
+                    <select wire:model="selectedGroupement" class="form-control  form-control-sm">
+                        <option value="" selected>Choisissez une colline</option>
+                        @foreach($groupements as $groupement)
+                        <option value="{{ $groupement->id }}">{{ $groupement->name }}</option>
+                        @endforeach
+                    </select>
+                    
+
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3">
@@ -43,7 +92,7 @@
                 </div>
                 <div class="col-md-3 pt-3">
 
-                    <button wire:click="updatePerson" class="mt-3 btn btn-sm btn-info">Modifier</button>
+                    <button wire:click="updatePerson" class="mt-3 btn btn-sm btn-info btn-block">Modifier</button>
                     
                 </div>
             </div>
@@ -93,7 +142,6 @@
 
     			</tbody>
     		</table>
-
 
 
           

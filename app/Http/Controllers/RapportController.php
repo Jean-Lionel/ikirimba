@@ -28,4 +28,8 @@ class RapportController extends Controller
     		
     	return view('rapports.index');
     }
+
+    public function create(){
+        return view('rapports.show');
+    }
 }

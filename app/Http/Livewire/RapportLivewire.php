@@ -22,7 +22,8 @@ class RapportLivewire extends Component
     public $jour;
     public $montantJour;
     public $montantTotalDesMembres;
-
+    public $bonjour = 12;
+  
     public function mount(){
     	$this->adhesion = Adhesion::all()->sum('montant');
     	$this->membreTotal = Person::all()->count();
@@ -58,6 +59,10 @@ class RapportLivewire extends Component
 
     );
 }
+
+    public function updatedCompteName(){
+        $this->compte = Compte::where('name', '=', $this->compteName)->first();
+    }
 
 
     private function contributionForSevenDay(){
