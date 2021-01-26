@@ -151,6 +151,7 @@ public function updatePerson(){
     $person->last_name = $this->last_name;
     $person->cni =  $this->cni;
     $person->telephone =   $this->telephone;
+    $person->groupement_id =   $this->selectedGroupement;
 
     $person->save();
 
