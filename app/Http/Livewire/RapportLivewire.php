@@ -2,17 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Adhesion;
+use App\Models\Compte;
+use App\Models\Person;
 use App\Models\Colline;
 use App\Models\Commune;
-use App\Models\Compte;
-use App\Models\Contribution;
-use App\Models\Groupement;
-use App\Models\Person;
-use App\Models\Province;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use App\Models\Adhesion;
+use App\Models\Province;
+use App\Models\Groupement;
+use App\Models\Contribution;
 use Livewire\WithPagination;
+use App\Models\StatiqueCompte;
+use Illuminate\Support\Facades\DB;
 
 class RapportLivewire extends Component
 {
@@ -25,6 +26,7 @@ class RapportLivewire extends Component
     public $bonjour = 12;
   
     public function mount(){
+
     	$this->adhesion = Adhesion::all()->sum('montant');
     	$this->membreTotal = Person::all()->count();
         $this->provinces = Province::all();
@@ -50,10 +52,19 @@ class RapportLivewire extends Component
 
     $membres= Person::latest()->paginate();
 
+        $aejt = StatiqueCompte::find(1)->montant;
+        $lcpc = StatiqueCompte::find(2)->montant;
+        $actionnaire = StatiqueCompte::find(3)->montant;
+        $membreNonApprouver = Person::where('approuve','=',"NON")->get()->count();
+
 
     return view('livewire.rapport-livewire',
         [
-            'membres' => $membres
+            'membres' => $membres,
+            'aejt' => $aejt,
+            'lcpc' => $lcpc,
+            'actionnaire' => $actionnaire,
+            'membreNonApprouver' => $membreNonApprouver
 
         ]
 

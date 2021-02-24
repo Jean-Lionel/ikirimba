@@ -148,8 +148,9 @@ body.modal-open {
           </div>
         </div>
       </div>
+
       <div class="col-xl-3 col-lg-6">
-        <div class="card card-inverse card-warning">
+        <div class="card card-inverse card-info">
           <div class="card-block bg-warning">
             <div class="rotate">
               <i class="fa fa-share fa-5x"></i>
@@ -169,8 +170,96 @@ body.modal-open {
 
 
 
+    </div>
+
+    <div class="row mb-3">
+
+      <div class="col-xl-3 col-lg-6">
+        <div class="card card-inverse card-info">
+          <div class="card-block bg-warning">
+            <div class="rotate">
+              <i class="fa fa-share fa-5x"></i>
+            </div>
+
+            <h6 class="text-uppercase">COMPTE DE AEJT</h6>
+
+            <h5 class="d-flex justify-content-around">
+              <i class="fab fa-amazon-pay"></i>
+
+              {{ number_format($aejt) }} #FBU
+            </h5>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6">
+        <div class="card card-inverse card-info">
+          <div class="card-block bg-info">
+            <div class="rotate">
+              <i class="fa fa-share fa-5x"></i>
+            </div>
+
+            <h6 class="text-uppercase">COMPTE FCC</h6>
+
+            <h5 class="d-flex justify-content-around">
+              <i class="fab fa-amazon-pay"></i>
+
+              {{ number_format($lcpc) }} #FBU
+            </h5>
+          </div>
+        </div>
+
+      </div>
+
+       <div class="col-xl-3 col-lg-6">
+        <div class="card card-inverse card-info">
+          <div class="card-block bg-info">
+            <div class="rotate">
+              <i class="fa fa-share fa-5x"></i>
+            </div>
+
+            <h6 class="text-uppercase">COMPTE DESC ACTIONNAIRES</h6>
+
+            <h5 class="d-flex justify-content-around">
+              <i class="fab fa-amazon-pay"></i>
+
+              {{ number_format( $actionnaire) }} #FBU
+            </h5>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-xl-3 col-lg-6">
+        <div class="card card-inverse card-info">
+          <div class="card-block bg-info">
+            <div class="rotate">
+              <i class="fa fa-share fa-5x"></i>
+            </div>
+
+            <h6 class="text-uppercase">MEMBRE NON APPROUVER</h6>
+
+            <h5 class="d-flex justify-content-around">
+              <i class="fab fa-amazon-pay"></i>
+
+              {{ number_format( $membreNonApprouver) }} MEMBRE (S)
+            </h5>
+          </div>
+        </div>
+
+      </div>
+
+
+      
+
 
     </div>
+
+
+
 
     <div class="row">
 

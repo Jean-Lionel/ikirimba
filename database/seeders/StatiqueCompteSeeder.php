@@ -22,7 +22,7 @@ class StatiqueCompteSeeder extends Seeder
         	'montant' => 0
 
         ]);
-
+        
         StatiqueCompte::create([
         	'name' => '0002',
         	'title' => 'COMPTE FCC',

@@ -13,6 +13,8 @@
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- Favicons -->
   <link rel="apple-touch-icon" href="/docs/4.5/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
   <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -142,8 +144,8 @@
   </main>
 
   <footer class="footer mt-auto py-3">
-    <div class="container">
-      <span class="text-muted">L.C.P.C  &copy;  <i>nininahazwe</i></span>
+    <div class="container text-center">
+      <span class="text-muted">A.E.J.T &copy;  <i>BURUNDI</i></span>
     </div>
   </footer>
 
