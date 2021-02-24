@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders\ProvinceSeeder;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoleSeeder;
+use Database\Seeders\CommuneSeeder;
+use Database\Seeders\ProvinceSeeder;
+use Database\Seeders\StatiqueCompteSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
              ProvinceSeeder::class,
              CommuneSeeder::class,
+             RoleSeeder::class,
+             StatiqueCompteSeeder::class,
 
             //RoleSeeder::class
         ]);

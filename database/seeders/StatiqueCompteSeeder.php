@@ -40,7 +40,7 @@ class StatiqueCompteSeeder extends Seeder
         ]);
         StatiqueCompte::create([
         	'name' => '0004',
-        	'title' => 'AUTRES COMPTE',
+        	'title' => 'COMPTE POUR LE MONTANT D ADHESION',
         	'description' => 'NO DESCRIPTION YET',
         	'montant' => 0
 
