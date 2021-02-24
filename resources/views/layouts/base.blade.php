@@ -23,6 +23,8 @@
   <link rel="mask-icon" href="/docs/4.5/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
   <link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
   <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
+
+  <link rel="stylesheet" href="{{ asset('css/print.min.css') }}">
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <meta name="theme-color" content="#563d7c">
 
@@ -154,6 +156,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
  @livewireScripts
+
+ <script type="text/javascript" src="{{ asset('js/print.min.js') }}"></script>
 
  @stack('scripts')
 

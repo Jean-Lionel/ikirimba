@@ -1,6 +1,9 @@
 <div>
     {{-- Nothing in the world is as soft and yielding as water. --}}
 
+
+    <link rel="stylesheet" href="{{ asset('css/print_doc.css') }}">
+
     <div class="row">
     	<div class="col">
     		Province <br>
@@ -57,8 +60,11 @@
     	
     </div>
 
+    <div>
+        <button class="btn btn-info" id="print-btn"><i class="fa fa-print"></i></button>
+    </div>
     <div class="row">
-    	<table class="table-hover table">
+    	<table class="" id="test-table">
     		<thead>
     			<tr>
     				<th>Numéro</th>
@@ -89,6 +95,60 @@
 
     </div>
 
+    <div id="printJS-form">
+
+       
+        <div class="content-doc">
+
+            <div class="header-doc">
+                <div>
+                    <p>AEJ BURUNDI</p>
+                </div>
+                <div style="text-align: right;">
+                    LE {{ date('d/M/Y') }}
+                </div>
+                
+            </div>
+
+            <div>
+                <h4 style="text-align: center;">Liste des membres</h4>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>PROVINCE</th>
+                        <th>COMMUNE</th>
+                        <th>COLLINE</th>
+                        <th>GROUPEMENT DE BASE</th>
+                        <th>NOM ET PRENOM</th>
+                        <th>COMPTE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($personnes_list as $p)
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ $p->groupement->name }}</td>
+                        <td>{{ $p->fullName }}</td>
+                         <td>{{ $p->compte->name }}</td>
+                        
+                    
+                    </tr>
+
+                    @endforeach
+                </tbody>
+            </table>
+
+            
+
+        </div>
+
+
+    </div>
+
 
 
 </div>
@@ -97,8 +157,27 @@
   @push('scripts')
 
   <script>
+
+    //printJS('printJS-form', 'html');
+    
+    const  btnPrint = $("#print-btn")
+
+    btnPrint.click(function(event) {
+        /* Act on the event */
+
+        $("#printJS-form").show()
+       
+        printJS({
+            printable : 'printJS-form', 
+            type : 'html',
+            css : "/css/print_doc.css"
+
+        });
+
+        $("#printJS-form").hide()
+    });
       
-      
+
   </script>
 
 

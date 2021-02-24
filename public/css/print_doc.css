@@ -1,0 +1,21 @@
+#printJS-form{
+    display: none;
+}
+
+ .header-doc{
+    display: flex;
+    justify-content: space-between;
+}
+.header-doc div{
+    width: 100%;
+    background: grey;
+    margin-left: 2px;
+}
+
+table,tr{
+    width: 100%;
+    border-collapse: collapse;
+}
+table,tr,td,th,thead,tbody{
+    border: 1px solid black;
+}

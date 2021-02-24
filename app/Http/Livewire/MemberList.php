@@ -62,8 +62,16 @@ class MemberList extends Component
                                       ->orWhere('telephone', 'like' , $searchKey);
                             })->paginate();
 
+         $personnes_list = Person::whereIn('groupement_id', $groupements)
+                            ->where(function($query) use ($searchKey){
+                                $query->where('first_name', 'like', $searchKey)
+                                      ->orWhere('last_name', 'like' , $searchKey)
+                                      ->orWhere('telephone', 'like' , $searchKey);
+                            })->get();
+
         return view('livewire.member-list',[
-        	'personnes' => $personnes
+        	'personnes' => $personnes,
+            'personnes_list' => $personnes_list
         ]);
     }
 
