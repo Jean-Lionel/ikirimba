@@ -18,11 +18,11 @@
 
 
     <div class="text-center">
-         <div wire:loading.delay>
+        {{--  <div wire:loading.delay>
             <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> --}}
     </div>
     {{-- Stop trying to control. --}}
     @if($showForm)
@@ -98,7 +98,7 @@
         <div class="d-flex justify-content-between">
             <h5>Liste des utilisateurs</h5>
             <button wire:click="$set('showForm', true)">
-                <i class="fas fa-user-plus"></i>Ajouter un utilisateur</button>
+                <i class="fa fa-user-plus"></i>Ajouter un utilisateur</button>
         </div>
         
         <table class="table table-sm table-bordered">
@@ -118,9 +118,9 @@
                        <td>{{ $user->email }}</td>
                        <td> 
                         <button wire:click="modifier({{ $user->id }})" class="btn btn-info btn-sm">
-                        <i class="fas fa-user-edit"></i></button>
+                        <i class="fa fa-edit"></i></button>
                         <button class="btn btn-danger btn-sm">
-                        <i class="fas fa-user-minus"></i></button>
+                        <i class="fa fa-remove"></i></button>
                     </td>
                    </tr>
                 @endforeach

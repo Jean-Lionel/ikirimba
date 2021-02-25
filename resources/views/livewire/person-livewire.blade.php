@@ -31,7 +31,7 @@
 		<div class="btn-group" role="group" aria-label="Basic example">
 			<button wire:click="$set('showForm',true)" type="button" class="btn btn-secondary">Adhésion du membre</button>
 			<button wire:click="$set('showForm',false)" type="button" class="btn ml-2 btn-primary">
-				<i class="fas far fa-bell"></i><span class="badge badge-light">{{ $membreNonApprouver->count() }}</span> Approuver 
+				<i class="fa fa-bell-o" style="font-size: 2rem;"></i><span class="badge badge-light">{{ $membreNonApprouver->count() }}</span> Approuver 
 			</button>
 			
 		</div>
@@ -48,7 +48,7 @@
 			<div class="col-md-6">
 				<h6>IDENTIFICATION DU NOUVEAU MEMBRE DANS LE L.C.P.C</h6>
 
-				@if($provinces)
+				{{-- @if($provinces) --}}
 
 				<div class="form-group">
 					<label for="">Province</label>
@@ -60,9 +60,9 @@
 					</select>
 
 				</div>
-				@endif
+				{{-- @endif --}}
 
-				@if(count($communes) > 0)
+				{{-- @if(count($communes) > 0) --}}
 
 				<div class="form-group">
 					<label for="">Commune</label>
@@ -74,10 +74,10 @@
 					</select>
 				</div>
 
-				@endif
+				{{-- @endif --}}
 
 
-				@if(count($collines) > 0)
+				{{-- @if(count($collines) > 0) --}}
 
 				<div class="form-group">
 					<label for="">Colline ou Quartier</label>
@@ -89,11 +89,11 @@
 					</select>
 				</div>
 
-				@endif
+				{{-- @endif --}}
 
 
 
-				@if(count($groupements) > 0)
+				{{-- @if(count($groupements) > 0) --}}
 
 				<div class="form-group">
 					<label for="">Groupement de base</label>
@@ -105,13 +105,13 @@
 					</select>
 				</div>
 
-				@endif
+				{{-- @endif --}}
 
 
 			</div>
 
 
-			@if($selectedGroupement)
+			{{-- @if($selectedGroupement) --}}
 			<div class="col-md-6">
 				<h6 >ENREGISTREMENT DU MEMBRE DANS LE PROJET <b>L.C.P.C</b></h6>
 
@@ -161,24 +161,23 @@
 				<div class="form-group row container">
 					<label class="col-8" for="">Numéro du parrain</label>
 
-					<input type="text" class="col-4" wire:model="parent_code">
+					<input type="text" class="col-4" wire:model="parentCode">
 					
 					@error('parent_code')
 					<p class="error text-danger">{{ $message }}</p>
 					@enderror
+					@if($choosedParend)
+
+
+					<div class="badge-info col-md-12 text-right">
+					{{$choosedParend->first_name.' '. $choosedParend->last_name  }} : {{ $choosedParend->compte->name }} 
+					</div>
+
+					@endif
 					
 				</div>
 
-				{{-- <div class="form-group row container">
-					<label class="col-8" for="">Numéro du Indirrect</label>
-
-					<input type="text" class="col-4" wire:model="code_parrent_indirect">
-					
-					@error('code_parrent_indirect')
-					<p class="error text-danger">{{ $message }}</p>
-					@enderror
-					
-				</div> --}}
+	
 
 
 				<div class="form-group row container">
@@ -203,7 +202,7 @@
 
 			</div>
 
-			@endif
+			{{-- @endif --}}
 		</div>
 
 	</form>

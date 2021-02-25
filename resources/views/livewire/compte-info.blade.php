@@ -62,9 +62,9 @@
 				</li>
 
 				<li class="list-group-item">
-					<h5>Abo binjiriye rimwe</h5>
+					{{-- <h5>Abo binjiriye rimwe</h5> --}}
 					{{-- {{ $membre->findChildren()}} --}}
-					<ul class="list-group">
+					{{-- <ul class="list-group">
 					@forelse ($membre->simblings() as $key=> $enfant)
 					 <li class="list-group-item">
 					 	{{ ++$key}} : {{ $enfant->fullName}}
@@ -73,7 +73,7 @@
 					@empty
 					<p>Aucun enfant</p>
 					@endforelse
-					</ul>
+					</ul> --}}
 
 				</li>
 				

@@ -128,9 +128,10 @@
                 <tbody>
                     @foreach($personnes_list as $p)
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$p->groupement->colline->commune->province->name }}</td>
+                        <td>{{$p->groupement->colline->commune->name }}</td>
+                        <td>{{ $p->groupement->colline->name }}</td>
+                        
                         <td>{{ $p->groupement->name }}</td>
                         <td>{{ $p->fullName }}</td>
                          <td>{{ $p->compte->name }}</td>

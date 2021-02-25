@@ -25,7 +25,7 @@
   <meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
 
   <link rel="stylesheet" href="{{ asset('css/print.min.css') }}">
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  
   <meta name="theme-color" content="#563d7c">
 
 
@@ -47,6 +47,10 @@
     main .container {
 
       padding-top: 0px; 
+    }
+
+    a i.fa {
+      font-size:20px;
     }
 
     @media (min-width: 768px) {
@@ -77,11 +81,11 @@
 
           @can('is-admin')
           <li class="nav-item">
-            <a class="nav-link {{ setActiveRouter('people.index') }}" href="{{ route('people.index') }}"><i class='fas fa-user-friends' style='font-size:24px'></i>MEMBRE</a>
+            <a class="nav-link {{ setActiveRouter('people.index') }}" href="{{ route('people.index') }}"><i class='fa fa-list'> Membre</i></a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fas fa-search-location"></i>REGION
+              <i class="fa fa-location-arrow"> Region</i>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ route('collines.index') }}">Enregistrement des colines</a>
@@ -94,22 +98,22 @@
           @endcan
 
            <li class="nav-item">
-            <a class="nav-link {{ setActiveRouter('contributions.index') }}" href="{{ route('contributions.index') }}"> <i class="   fas fa-money-check-alt"></i>Contribution</a>
+            <a class="nav-link {{ setActiveRouter('contributions.index') }}" href="{{ route('contributions.index') }}"> <i class="fa fa-creative-commons">Contribution</i></a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link {{ setActiveRouter('people.create') }}" href="{{ route('people.create') }}"> <i class="fas fa-book-open"></i> Adhésion dans L.C.P.C</a>
+            <a class="nav-link {{ setActiveRouter('people.create') }}" href="{{ route('people.create') }}"> <i class="fa fa-user-plus">Adhésion dans L.C.P.C</i></a>
           </li>
 
           @can('is-admin')
 
           <li class="nav-item">
-            <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="  fas fa-chart-line"></i>Rapport</a>
+            <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="fa fa-bar-chart">Rapport</i></a>
           </li>
 
 
           <li class="nav-item">
-            <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="  fas fa-user-cog"></i>Utilisateur</a>
+            <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="fa fa-user-md">Utilisateur</i></a>
           </li>
 
           @endcan
@@ -128,7 +132,8 @@
                             <x-jet-dropdown-link class="btn btn-outline-success my-2 my-sm-0" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
                                                             this.closest('form').submit();">
-                                {{ __('Logout') }}
+                             
+                                                            <i class="  fa fa-unlock-alt">    {{ __('Logout') }}</i>
                             </x-jet-dropdown-link>
                         </form>
       </div>
@@ -138,7 +143,7 @@
 
   <!-- Begin page content -->
   <main role="main" class="flex-shrink-0">
-    <div class="container">
+    <div class="container-fluid">
 
       @yield('content')
 

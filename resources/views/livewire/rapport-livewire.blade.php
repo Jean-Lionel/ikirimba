@@ -273,8 +273,8 @@ body.modal-open {
           </li>
 
            <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="{{ route('memberListe') }}">Liste des Membres</a>
-            <span class="badge-primary badge-pill display-5"> <i class="fas fa-list"></i> </span>
+            <a href="{{ route('memberListe') }}"> <i class="  fa fa-list-ol">Liste des Membres</i> </a>
+            
           </li>
 
 
@@ -295,7 +295,7 @@ body.modal-open {
 
          <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="{{ route('rapport.create') }}">Information des comptes</a>
-            <span class="badge-primary badge-pill display-5"> <i class="fas fa-list"></i> </span>
+            <span class="badge-primary badge-pill display-5"> <i class="fa fa-info-circle"></i> </span>
           </li>
 
       </div>
@@ -323,6 +323,8 @@ body.modal-open {
   @push('scripts')
 
   <script>
+
+    // console.log(($aejt))
     var chartTyp = ['bar','line','pie','scatter'];
 
     var ctx = document.getElementById('myChart').getContext('2d');

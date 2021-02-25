@@ -39,11 +39,12 @@ class PersonLivewire extends Component
     public $cni = "";
     public $sexe = "";
     public $montant = "";
-    public $parent_code = "";
+    public $parentCode = "";
     public $code_parrent_indirect = "";
 
 
     public $confirming;
+    public $choosedParend;
 
     public function confirmDelete($id)
     {
@@ -58,6 +59,12 @@ class PersonLivewire extends Component
                 'membreNonApprouver' => Person::where('approuve','=',"NON")->get()
                 //'membreNonApprouver' => Person::all()
             ]);
+    }
+
+    public function   updatedparentCode($code){
+        $c = Compte::where('name', '=', $code)->first();
+
+        $c  ? $this->choosedParend = $c->membre : True;
     }
 
 
@@ -99,7 +106,7 @@ class PersonLivewire extends Component
        $this->last_name = null;
        $this->telephone = null;
        $this->cni =null;
-       $this->parent_code =null;
+       $this->parentCode =null;
        $this->parrain_inderrect =null;
 
    }
@@ -114,15 +121,15 @@ class PersonLivewire extends Component
 
 private function validateParentCode(){
     if(Compte::all()->count() > 5){
-        $this->rules['parent_code'] = 'required|exists:comptes,name';
+        $this->rules['parentCode'] = 'required|exists:comptes,name';
     }
 }
 
 protected $messages = [
     'montant.min' => "Le montant d'adhésion est de 15000 FBU",
     'montant.max' => "Le montant d'adhésion est invalide",
-    'parent_code.exists' => "Le compte est invalide",
-    'parent_code.required' => "Le compte est obligatoire",
+    'parentCode.exists' => "Le compte est invalide",
+    'parentCode.required' => "Le compte est obligatoire",
 ];
 
 public function updatedMontant(){
@@ -142,7 +149,7 @@ public function store(){
 
             DB::beginTransaction();
 
-            $compte = Compte::where('name','=',$this->parent_code)->first();
+            $compte = Compte::where('name','=',$this->parentCode)->first();
 
             $personne = Person::create([
                 'first_name' => $this->first_name,
@@ -353,7 +360,7 @@ return back();
 
 // private function checkNumberEnfant(){
 
-//     $compte = Compte::where('name','=',$this->parent_code)->first();
+//     $compte = Compte::where('name','=',$this->parentCode)->first();
 
 //     if($compte == null and Compte::all()->count()){
 //         session()->flash('error',"Le numéro de compte n'existe pas" );
