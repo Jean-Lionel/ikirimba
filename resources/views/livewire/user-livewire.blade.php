@@ -56,8 +56,11 @@
                 <label for="">Rôle</label>
                 <select wire:model="role" id="" class="form-control">
                     <option value="">Choisissez ici ...</option>
+
+                    @foreach($users_role as $role)
                     <option value="UTILISATEUR">UTILISATEUR</option>
                     <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
+                    @endforeach
 
                 </select>
                 @error('email')

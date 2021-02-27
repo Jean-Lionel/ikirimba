@@ -22,6 +22,7 @@ class CreateContributionsTable extends Migration
             $table->foreignId('person_id');
             $table->string('person_name')->nullable();
             $table->foreignId('compte_id');
+            $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

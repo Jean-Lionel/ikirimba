@@ -92,6 +92,7 @@ class ContributionLivewire extends Component
 
 		} catch (\Exception $e) {
 			DB::rollback();
+			dd($e->getMessage());
 
 			session()->flash('error',"Une erreur s'est produite");
 
