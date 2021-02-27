@@ -305,7 +305,7 @@ body.modal-open {
 
     <div >
 
-      <div class="row">
+      <div class="row mr-2 ml-2">
         <div class="col-md-6 test-element">
           <canvas id="myChart" width="400px"> </canvas>
         </div>
