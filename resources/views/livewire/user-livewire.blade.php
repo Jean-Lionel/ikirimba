@@ -67,9 +67,12 @@
                 <label for="">Rôle</label>
                 <select wire:model="role" id="" class="form-control">
                     <option value="">Choisissez ici ...</option>
+
                     <option value="MEMBRE">MEMBRE</option>
+
                     <option value="UTILISATEUR">UTILISATEUR</option>
                     <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
+                
 
                 </select>
                 @error('email')
