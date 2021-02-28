@@ -30,6 +30,7 @@ class User extends Authenticatable
         'username',
         'description',
         'role',
+        'compteName'
     ];
 
     /**
@@ -71,5 +72,9 @@ class User extends Authenticatable
     public function isSimpleUser()
     {
          return $this->role === "UTILISATEUR";
+    }
+
+    public function isMember(){
+        return $this->role === "MEMBRE";
     }
 }

@@ -26,7 +26,7 @@
     </div>
     {{-- Stop trying to control. --}}
     @if($showForm)
-    <form action="" wire:submit.prevent="saveUser">
+    <form action="" wire:submit.prevent="saveUser" autocomplete="false">
          <h2 class="text-center">Ajouter un utilisateur</h2>
     	<div class="row">
 
@@ -37,25 +37,37 @@
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
     		</div>
+
+
+             <div class="col-md-3 form-group">
+                <label for="">Numero de compte</label>
+                <input type="text" wire:model="compteName" class="form-control" autocomplete="false">
+               
+                @error('compteName')
+                    <span class="text-danger error">{{ $message }}</span>
+                @enderror
+            </div>
+
     		<div class="col-md-4 form-group">
     			<label for="">Nom d'utilisateur</label>
-    			<input wire:model="username" type="text" class="form-control">
+    			<input wire:model="username" type="text" class="form-control" autocomplete="false">
                 @error('username')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
     		</div>
     		<div class="col-md-4 form-group">
     			<label for="">Email | Téléphone</label>
-    			<input wire:model="email" type="text" class="form-control">
+    			<input wire:model="email" type="text" class="form-control" autocomplete="false">
                 @error('email')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
     		</div>
 
-            <div class="col-md-4 form-group">
+            <div class="col-md-3 form-group">
                 <label for="">Rôle</label>
                 <select wire:model="role" id="" class="form-control">
                     <option value="">Choisissez ici ...</option>
+                    <option value="MEMBRE">MEMBRE</option>
                     <option value="UTILISATEUR">UTILISATEUR</option>
                     <option value="ADMINISTRATEUR">ADMINISTRATEUR</option>
 
@@ -66,21 +78,20 @@
             </div>
 
 
-    		<div class="col-md-4 form-group">
+
+    		<div class="col-md-2 form-group">
     			<label for="">Mot de pass </label>
-    			<input wire:model="password" type="password" class="form-control">
+    			<input wire:model="password" type="password" class="form-control" autocomplete="false">
                 @error('password')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
     		</div>
 
-    		<div class="col-md-4 form-group">
+    		<div class="col-md-2 form-group">
     			<label for="">Confirmer </label>
-    			<input wire:model="password_confirmation" type="password" class="form-control">
+    			<input wire:model="password_confirmation" type="password" autocomplete="false" class="form-control">
     		</div>
-             <div class="col-md-12">
-                <textarea wire:model="description" class="form-control"></textarea>
-            </div>
+            
     		<div class="col-md-4 d-flex form-group mt-3 justify-content-around">
     			
     			<input type="submit" value="Enregistrer" class="form-control btn btn-primary">

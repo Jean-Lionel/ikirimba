@@ -28,7 +28,9 @@ Route::get('/', function () {
 // Route::get("/login",ConnexionController::class);
 
 
-//Route::get('/',[PersonController::class,'index'])
+Route::get('/activites',function(){
+	return view("site.activites");
+});
 
 
 // Route::resource('communes', CommuneController::class);
@@ -54,10 +56,12 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('member-list', [PersonController::class , 'memberListe'])->name('memberListe');
 	
 	Route::resource('contributions', ContributionController::class);
+	
 
 	
 
 	Route::resource('rapport', RapportController::class);
 	Route::resource('users', UserController::class);
+	Route::get('users-info', [UserController::class , 'info'])->name('users-info');
 
 });

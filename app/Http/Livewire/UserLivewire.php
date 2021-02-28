@@ -18,9 +18,10 @@ class UserLivewire extends Component
 	public $email;
 	public $username;
     public $role;
-	public $description;
+	public $description = "No description needded";
 	public $password;
     public $identification;
+    public $compteName;
 	public $password_confirmation;
 	public $showForm = false;
 
@@ -38,6 +39,7 @@ class UserLivewire extends Component
          'email' => ['max:255', 'unique:users'],
          'username' => ['string', 'max:255', 'unique:users'],
          'password' => ['string', 'max:255', 'unique:users'],  
+         'compteName' => ['string', 'max:255', 'unique:users'],  
 
     ];
 
@@ -60,6 +62,7 @@ class UserLivewire extends Component
                 'username' => $this->username,
                 'email' => $this->email,
                 'role' => $this->role,
+                'compteName' => $this->role,
                 'description' => $this->description,
                 'password' => Hash::make($this->password),
 
@@ -72,6 +75,7 @@ class UserLivewire extends Component
             'username' => $this->username,
             'email' => $this->email,
             'role' => $this->role,
+            'compteName' => $this->role,
             'description' => $this->description,
             'password' => Hash::make($this->password),
           ]);

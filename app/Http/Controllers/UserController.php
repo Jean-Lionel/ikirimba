@@ -15,4 +15,9 @@ class UserController extends Controller
     	
     	return view('users.index');
     }
+
+    public function info(){
+
+    	return view('users.info');
+    }
 }

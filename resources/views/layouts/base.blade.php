@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="Jean Lionel NININAHAZWE">
   <meta name="generator" content="Jekyll v4.1.1">
-  <title>L.C.P.C | </title>
+  <title>L.C.P.C | A.E.J.T BURUNDI</title>
 
  {{--  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/"> --}}
 
@@ -111,12 +111,16 @@
             <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="fa fa-bar-chart">Rapport</i></a>
           </li>
 
-
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="fa fa-user-md">Utilisateur</i></a>
           </li>
 
           @endcan
+          <li class="nav-item">
+
+             <a class="nav-link {{ setActiveRouter('users-info') }}" href="{{ route('users-info') }}"><i class="fa fa-info-circle"> Compte Membre</i></a>
+            
+          </li>
 
 
         </ul>
@@ -133,7 +137,7 @@
                                                 onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                              
-                                                            <i class="  fa fa-unlock-alt">    {{ __('Logout') }}</i>
+                                                            <i class="  fa fa-unlock-alt">    {{ __('Se Déconnecter') }}</i>
                             </x-jet-dropdown-link>
                         </form>
       </div>

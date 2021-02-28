@@ -13,9 +13,9 @@
 	<script src="{{ asset('js/skel-panels.min.js') }}"></script>
 	<script src="{{ asset('js/init.js') }}"></script>
 	<noscript>
-		<link rel="stylesheet" href="css/skel-noscript.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/style-desktop.css" />
+		<link rel="stylesheet" href="{{ asset('css/skel-noscript.css') }}" />
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+		<link rel="stylesheet" href="{{ asset('css/style-desktop.css"') }}" />
 	</noscript>
 	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
@@ -34,7 +34,7 @@
 			<!-- Nav -->
 			<nav id="nav">
 				<ul>
-					<li class="active"><a href="index.html">Accueil</a></li>
+					<li class="active"><a href="/">Accueil</a></li>
 					<li><a href="#main">Appropos de nous</a></li>
 					<li><a href="#contact">Contact</a></li>
 					<li><a href="/login">Se Connecter</a></li>
@@ -208,11 +208,11 @@
 							<h2>Nos Activites</h2>
 						</header>
 						<ul class="style1">
-							<li><a href="activites/1">Maecenas luctus lectus at sapien</a></li>
-							<li><a href="activites/2">Etiam rhoncus volutpat erat</a></li>
-							<li><a href="activites/3">Donec dictum metus in sapien</a></li>
-							<li><a href="activites/4">Nulla luctus eleifend purus</a></li>
-							<li><a href="activites/5">Maecenas luctus lectus at sapien</a></li>
+							<li><a href="activites/">Maecenas luctus lectus at sapien</a></li>
+							<li><a href="activites/">Etiam rhoncus volutpat erat</a></li>
+							<li><a href="activites/">Donec dictum metus in sapien</a></li>
+							<li><a href="activites/">Nulla luctus eleifend purus</a></li>
+							<li><a href="activites/">Maecenas luctus lectus at sapien</a></li>
 						</ul>
 					</section>
 					<section class="sidebar">
@@ -261,7 +261,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="6u">
-					<section>
+					<section style="margin-top:50px">
 						<h2>Nos activités récentes</h2>
 					
 							<div class="ballon-bgbtm">&nbsp;</div>
@@ -269,8 +269,32 @@
 						</section>
 					</div>
 					<div class="6u" id="contact">
-						<section>
+						<section style="margin-top:50px">
 							<h2>Contact</h2>
+							<div class="content-container text-light" style="display: flex; justify-content: space-between;" style="color:white">
+								<div>
+									<span style="color:white">TEL: +257 79 909 353 / +257 61 381 776</span> <br>
+				
+									<span style="color:white">Email: <a href="mailto:athanase19980@yahoo.fr">athanase19980@yahoo.fr</a></span>
+								</div>
+
+
+								<div>
+									<div class="content-container text-light" style="display: flex; justify-content: space-between;">
+										<span style="color:white">ADDRESSE: Mairie de Bujumbura</span>
+									</div>
+									<div class="content-container text-light" style="display: flex; justify-content: space-between;">
+										<span class="text-light" style="color:white">COMMUNE : Muha</span>
+										
+									</div>
+									<div class="content-container text-light" style="display: flex; justify-content: space-between;">
+										<span style="color:white">Zone :Musaga/3e Av</span>
+									</div>
+
+								</div>
+							</div>
+
+
 						</section>
 					</div>
 					
@@ -280,7 +304,7 @@
 		<!-- /Footer -->
 
 		<!-- Copyright -->
-		<div id="copyright" class="container">
+		<div id="copyright" class="container" style="color:white">
 			&copy; BURUNDI - <span> 
 				<script>
 				 document.write(new Date());
