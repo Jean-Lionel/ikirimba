@@ -97,6 +97,8 @@
 
           @endcan
 
+          @cannot('is-member')
+
            <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('contributions.index') }}" href="{{ route('contributions.index') }}"> <i class="fa fa-creative-commons">Contribution</i></a>
           </li>
@@ -104,6 +106,8 @@
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('people.create') }}" href="{{ route('people.create') }}"> <i class="fa fa-user-plus">Adhésion dans L.C.P.C</i></a>
           </li>
+
+          @endcannot
 
           @can('is-admin')
 

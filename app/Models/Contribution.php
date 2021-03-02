@@ -19,7 +19,7 @@ class Contribution extends Model
 
     	self::creating(function($model){
 
-    		$model->user_id = Auth::user()->id ?? 1;
+    		$model->user_id = Auth::user()->id ?? 0;
  
     	});
     }
@@ -27,4 +27,13 @@ class Contribution extends Model
     public function membre(){
     	return $this->belongsTo('App\Models\Person','person_id','id');
     }
+
+    // public static function boot(){
+    //     parent::boot();
+
+    //     self::creating(function($model){
+    //         $model->user_id = Auth::user()->id;
+
+    //     });
+    // }
 }

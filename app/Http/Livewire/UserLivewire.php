@@ -18,12 +18,12 @@ class UserLivewire extends Component
 	public $email;
 	public $username;
     public $role;
-	public $description = "No description needded";
-	public $password;
-    public $identification;
+    public $description = "No description needded";
+    public $password;
+    public $identification = null;
     public $compteName;
-	public $password_confirmation;
-	public $showForm = false;
+    public $password_confirmation;
+    public $showForm = false;
 
     public function render()
     {
@@ -31,18 +31,33 @@ class UserLivewire extends Component
         return view('livewire.user-livewire',
         	['users' => $users]
 
-    );
+        );
     }
 
-    protected $rules = [
-    	 'name' => ['required', 'string', 'max:255'],
-         'email' => ['max:255', 'unique:users'],
-         'username' => ['string', 'max:255', 'unique:users,username,1'],
-         'password' => ['string', 'max:255', 'unique:users'],  
-         'compteName' => ['string','required', 'max:255', 'unique:users'],  
-         'role' => ['required'],  
+    //protected $rules = [];
 
-    ];
+    protected function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'username' => 'required|min:6|max:255|alpha_dash|unique:users,username,' . $this->identification,
+            'email' => 'required|string|max:255|unique:users,email,' . $this->identification ,
+            'compteName' => 'string|required|max:255|exists:comptes,name|unique:users,compteName,'.$this->identification,
+            'role' => 'required'
+        ];
+    }
+
+
+    // protected function validateUpdateUser(){
+
+    //     $this->rules['name'] = "required|string| max:255";
+
+    //     $this->rules['email'] = "max:255|unique:users,email,".$this->identification;
+    //     $this->rules['username'] ="string|max:255|unique:users,username,".$this->identification;
+    //     $this->rules['password'] = "string|max:255"; 
+    //     $this->rules['compteName'] = "string|required|max:255|unique:users,".$this->identification; 
+    //     $this->rules['role'] = 'required';
+    // }
 
 
     // public function update($propertyName){
@@ -50,15 +65,42 @@ class UserLivewire extends Component
     // }
 
     public function saveUser(){
-    	$this->validate();
-    	if($this->password === $this->password_confirmation)
-    	{
+
+         $validatedData = $this->validate();
+
+    
+        if($this->password === $this->password_confirmation)
+        {
 
 
-         if($this->identification){
+           if($this->identification){
             $user = User::find($this->identification) ?? new User;
 
-            $user->update([
+
+            $user->name = $this->name;
+            $user->username = $this->username;
+            $user->email = $this->email;
+            $user->role = $this->role;
+            $user->compteName = $this->compteName;
+            $user->description = $this->description;
+            if($this->password){
+                $user->password = Hash::make($this->password);
+            }
+            
+
+            $user->save();
+
+        }else{
+
+            if($this->password == ""){
+                $password = Hash::make('12345678');
+
+            }else{
+                $password = Hash::make($this->password);
+
+            }
+
+            User::create([
                 'name' => $this->name,
                 'username' => $this->username,
                 'email' => $this->email,
@@ -66,55 +108,43 @@ class UserLivewire extends Component
                 'compteName' => $this->compteName,
                 'description' => $this->description,
                 'password' => Hash::make($this->password),
-
             ]);
 
-         }else{
+        }
 
-            User::create([
-            'name' => $this->name,
-            'username' => $this->username,
-            'email' => $this->email,
-            'role' => $this->role,
-            'compteName' => $this->compteName,
-            'description' => $this->description,
-            'password' => Hash::make($this->password),
-          ]);
 
-         }
-    	
+        $this->email = "";
 
-        	$this->email = "";
+        $this->reset();
 
-        	$this->reset();
+        session()->flash('message','Enregistrement réussi');
 
-        	session()->flash('message','Enregistrement réussi');
+    }else{
+      session()->flash('message','Les deux mot de passe sont différents');
+  }
 
-    	}else{
-    		session()->flash('message','Les deux mot de passe sont différents');
-    	}
-    	
-    }
+}
 
-    public function modifier($id)
-    {
-        $user = User::find($id) ?? new user; 
+public function modifier($id)
+{
+    $user = User::find($id) ?? new user; 
 
-        $this->identification = $user->id;
-        $this->name = $user->name;
-        $this->username = $user->username;
-        $this->email = $user->email;
-        $this->compteName = $user->compteName;
-        $this->description = $user->description;
-        $this->showForm = true;
+    $this->identification = $user->id;
+    $this->name = $user->name;
+    $this->username = $user->username;
+    $this->email = $user->email;
+    $this->role = $user->role;
+    $this->compteName = $user->compteName;
+    $this->description = $user->description;
+    $this->showForm = true;
 
         //dd($user );
-        
-    }
+
+}
 
 
-    public function annuler(){
-         $this->showForm = false;
-         $this->reset();
-    }
+public function annuler(){
+   $this->showForm = false;
+   $this->reset();
+}
 }

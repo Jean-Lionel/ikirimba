@@ -104,6 +104,8 @@
 
 			</div>
 
+			@can('is-admin')
+
 			<div class="col-md-12 col-sm-12">
 		
 
@@ -120,6 +122,8 @@
 					
 					
 				</div>
+
+
 				<h4>Liste des contributions</h4>
 				<table class="table table-sm table-hover">
 					<thead class="badge-dark">
@@ -155,6 +159,8 @@
 
 				{{ $contributions->links() }}
 			</div>
+
+			@endcan
 		</div>
 	</form>
 </div>
