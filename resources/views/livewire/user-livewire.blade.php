@@ -66,7 +66,8 @@
             <div class="col-md-3 form-group">
                 <label for="">Rôle</label>
                 <select wire:model="role" id="" class="form-control">
-                    <option value="">Choisissez ici ...</option>
+
+                    <option > Choisissez ici ...</option>
 
                     <option value="MEMBRE">MEMBRE</option>
 
@@ -75,7 +76,7 @@
                 
 
                 </select>
-                @error('email')
+                @error('role')
                     <span class="text-danger error">{{ $message }}</span>
                 @enderror
             </div>

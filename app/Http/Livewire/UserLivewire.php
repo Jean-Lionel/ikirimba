@@ -37,16 +37,17 @@ class UserLivewire extends Component
     protected $rules = [
     	 'name' => ['required', 'string', 'max:255'],
          'email' => ['max:255', 'unique:users'],
-         'username' => ['string', 'max:255', 'unique:users'],
+         'username' => ['string', 'max:255', 'unique:users,username,1'],
          'password' => ['string', 'max:255', 'unique:users'],  
-         'compteName' => ['string', 'max:255', 'unique:users'],  
+         'compteName' => ['string','required', 'max:255', 'unique:users'],  
+         'role' => ['required'],  
 
     ];
 
 
-    public function update($propertyName){
-    	$this->validateOnly($propertyName);
-    }
+    // public function update($propertyName){
+    // 	$this->validateOnly($propertyName);
+    // }
 
     public function saveUser(){
     	$this->validate();
@@ -62,7 +63,7 @@ class UserLivewire extends Component
                 'username' => $this->username,
                 'email' => $this->email,
                 'role' => $this->role,
-                'compteName' => $this->role,
+                'compteName' => $this->compteName,
                 'description' => $this->description,
                 'password' => Hash::make($this->password),
 
@@ -75,7 +76,7 @@ class UserLivewire extends Component
             'username' => $this->username,
             'email' => $this->email,
             'role' => $this->role,
-            'compteName' => $this->role,
+            'compteName' => $this->compteName,
             'description' => $this->description,
             'password' => Hash::make($this->password),
           ]);
@@ -103,6 +104,7 @@ class UserLivewire extends Component
         $this->name = $user->name;
         $this->username = $user->username;
         $this->email = $user->email;
+        $this->compteName = $user->compteName;
         $this->description = $user->description;
         $this->showForm = true;
 

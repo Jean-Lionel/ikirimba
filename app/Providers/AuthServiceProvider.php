@@ -43,6 +43,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('is-member', function(User $user){
             return $user->isMember();
-        })
+        });
     }
 }

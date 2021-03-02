@@ -209,13 +209,13 @@
 						<header>
 							<h2>Nos Activites</h2>
 						</header>
-						<ul class="style1">
+						{{-- <ul class="style1">
 							<li><a href="activites/">Maecenas luctus lectus at sapien</a></li>
 							<li><a href="activites/">Etiam rhoncus volutpat erat</a></li>
 							<li><a href="activites/">Donec dictum metus in sapien</a></li>
 							<li><a href="activites/">Nulla luctus eleifend purus</a></li>
 							<li><a href="activites/">Maecenas luctus lectus at sapien</a></li>
-						</ul>
+						</ul> --}}
 					</section>
 					<section class="sidebar">
 						<header>
