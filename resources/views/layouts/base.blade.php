@@ -122,7 +122,7 @@
           @endcan
           <li class="nav-item">
 
-             <a class="nav-link {{ setActiveRouter('users-info') }}" href="{{ route('users-info') }}"><i class="fa fa-info-circle"> Compte Membre</i></a>
+             <a class="nav-link {{ setActiveRouter('users-info') }}" href="{{ route('users-info') }}"><i class="fa fa-info-circle"> Compte du Membre</i></a>
             
           </li>
 

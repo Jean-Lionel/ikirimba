@@ -94,6 +94,7 @@
 			top: 0;
 			width: 80px;
 			height: 60px;
+
 		}
 
 			#titleBar .toggle:after
@@ -105,8 +106,9 @@
 				position: absolute;
 				left: 10px;
 				top: 15px;
+				/*background*/
 				background: url('images/toggle.svg') 0px 0px no-repeat;
-				opacity: 0.5;
+				/*opacity: 0.5;*/
 			}
 
 			#titleBar .toggle:active:after

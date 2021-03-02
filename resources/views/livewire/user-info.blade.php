@@ -20,8 +20,25 @@
     				</li>
 
                     <li class="list-group-item">
-                        <button>Modifier Le mot de pass</button>
+                        <button class="btn-info" wire:click="showFormChangePassWord()">Modifier Le mot de pass</button>
                     </li>
+
+                   @if($showForm)
+                   <li class="list-group-item">
+                        <label for="">Nouveau Mot de pass</label>
+                       <input type="text" wire:model="passWord" class="form-control">
+                       <label for="">Confirm votre Mot de pass</label>
+                       <input type="text" wire:model="confirmPassWord" class="form-control">
+                       
+                       <div class="d-flex mt-3 justify-content-center">
+                        <button class="btn-info mr-3">Change</button>
+                        <button class="btn-warning ml-3">Annuler</button>
+                           
+                       </div>
+
+                   </li>
+
+                   @endif
     				
     			</ul>
     		</div>

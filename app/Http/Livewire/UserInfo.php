@@ -10,6 +10,10 @@ class UserInfo extends Component
 {
 	public $connected_user;
 	public $compte;
+	public $showForm = false;
+
+	public $passWord = "";
+	public $confirmPassWord = "";
 
 	public function mount(){
 		$this->connected_user = Auth::user();
@@ -21,5 +25,10 @@ class UserInfo extends Component
     public function render()
     {
         return view('livewire.user-info');
+    }
+
+    public function showFormChangePassWord(){
+    	$this->showForm = true;
+
     }
 }

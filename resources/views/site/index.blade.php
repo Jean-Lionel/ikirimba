@@ -13,14 +13,22 @@
 	<script src="{{ asset('js/skel.min.js') }}"></script>
 	<script src="{{ asset('js/skel-panels.min.js') }}"></script>
 	<script src="{{ asset('js/init.js') }}"></script>
-	
+
+
 	<noscript>
 		<link rel="stylesheet" href="{{ asset('css/skel-noscript.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/style-desktop.css"') }}" />
+		<link rel="stylesheet" href="{{ asset('css/style-mobile.css"') }}" />
 	</noscript>
 	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
+
+	<style>
+
+
+		
+	</style>
 </head>
 <body class="homepage">
 
