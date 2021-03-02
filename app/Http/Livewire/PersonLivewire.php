@@ -283,6 +283,19 @@ public function approuverEnregistrement($membre){
             $parent->compte->montant += $m;
             $parent->compte->save();
 
+        }else{
+
+            $aejt = StatiqueCompte::find(1);
+
+            $m =  $montant_caisse / 5 ; // 3000 car c'est 1/5 de 15000
+
+            $this->checkStaticCompteOperation($aejt->name,$compte_membre, $aejt->montant);
+
+            $montant_caisse -= $m;
+             $aejt->montant +=  $m;
+
+            $aejt->save();
+
         }
 
         // AJOUT DES MONTANT SUR LES COMPTES 
