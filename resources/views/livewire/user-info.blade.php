@@ -8,15 +8,15 @@
 
     		<div class="col-md-6">
     			<ul class="list-group">
-    				<li class="list-group-item">Nom et prénom : {{ $connected_user->name }} </li>
+    				<li class="list-group-item">Nom et prénom : {{ $connected_user->name ?? "" }} </li>
     				<li class="list-group-item">
-    					Compte : {{ $connected_user->compteName }}
+    					Compte : {{ $connected_user->compteName ?? "" }}
     				</li>
     				<li class="list-group-item">
-    					Nom d'utilisateur : {{ $connected_user->username }}
+    					Nom d'utilisateur : {{ $connected_user->username ?? "" }}
     				</li>
     				<li class="list-group-item">
-    					Contact : {{ $connected_user->email }}
+    					Contact : {{ $connected_user->email ?? "" }}
     				</li>
 
                     <li class="list-group-item">
@@ -64,7 +64,7 @@
     			
 
     			<ul class="list-group">
-    				<li class="list-group-item">Balance , Compte : {{ number_format($compte->montant) }} FBU</li>
+    				<li class="list-group-item">Balance , Compte : {{ number_format($compte->montant ?? 0)  }} FBU</li>
     				
     			</ul>
     		</div>

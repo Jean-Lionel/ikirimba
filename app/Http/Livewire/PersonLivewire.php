@@ -120,7 +120,7 @@ class PersonLivewire extends Component
 ];
 
 private function validateParentCode(){
-    if(Compte::all()->count() > 5){
+    if(Compte::all()->count() > 1000000000){
         $this->rules['parentCode'] = 'required|exists:comptes,name';
     }
 }
@@ -289,6 +289,7 @@ public function approuverEnregistrement($membre){
 
             $m =  $montant_caisse / 5 ; // 3000 car c'est 1/5 de 15000
 
+            $compte_membre = $personne->compte->name; 
             $this->checkStaticCompteOperation($aejt->name,$compte_membre, $aejt->montant);
 
             $montant_caisse -= $m;
