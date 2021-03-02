@@ -22,17 +22,35 @@
                     <li class="list-group-item">
                         <button class="btn-info" wire:click="showFormChangePassWord()">Modifier Le mot de pass</button>
                     </li>
+                    @if($message)
+
+                    <li class="list-group-item">
+                        {!! $message !!}
+                        
+
+                    </li>
+
+
+                    @endif
 
                    @if($showForm)
                    <li class="list-group-item">
                         <label for="">Nouveau Mot de pass</label>
-                       <input type="text" wire:model="passWord" class="form-control">
+                       <input type="password" wire:model="passWord" class="form-control">
+                        @error('passWord')
+                            <p class="error text-danger">{{ $message }}</p>
+                       @enderror
                        <label for="">Confirm votre Mot de pass</label>
-                       <input type="text" wire:model="confirmPassWord" class="form-control">
+
+                       <input type="password" wire:model="confirmPassWord" class="form-control">
+
+                        @error('confirmPassWord')
+                             <p class="error text-danger">{{ $message }}</p>
+                       @enderror
                        
                        <div class="d-flex mt-3 justify-content-center">
-                        <button class="btn-info mr-3">Change</button>
-                        <button class="btn-warning ml-3">Annuler</button>
+                        <button class="btn-info mr-3" wire:click="changePassWord">Change</button>
+                        <button class="btn-warning ml-3" wire:click="annulerModification">Annuler</button>
                            
                        </div>
 
