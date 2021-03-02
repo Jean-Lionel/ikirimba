@@ -18,6 +18,10 @@
     				<li class="list-group-item">
     					Contact : {{ $connected_user->email }}
     				</li>
+
+                    <li class="list-group-item">
+                        <button>Modifier Le mot de pass</button>
+                    </li>
     				
     			</ul>
     		</div>
