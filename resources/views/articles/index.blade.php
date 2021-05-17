@@ -3,17 +3,18 @@
 @section('content')
 
 <div class="container">
-	<div class="row">
-		<div>
+	<div>
 			<a href="{{ route('articles.create') }}">Nouvel Article</a>
-		</div>
+	</div>
+	<div class="row">
+		
 		@foreach ($articles as $article)
 			{{-- expr --}}
 
-			<div class="col-md-12">
-				
-				<h3>{{ $article->title }}</h3>
-				<a href="{{ route('articles.show') }}">
+			<div class="col-md-3">
+			
+				<a href="{{ route('articles.show', $article) }}">
+				<span>{{ $article->title }}</span>
 				<div>
 					<img src="{{ asset('images/'.$article->image_link) }}" style="height: 200px;" class="img-thumbnail" alt="">
 				</div>
