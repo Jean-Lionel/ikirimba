@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="Jean Lionel NININAHAZWE">
   <meta name="generator" content="Jekyll v4.1.1">
-  <title>L.C.P.C | A.E.J.T BURUNDI</title>
+  <title>AJET BURUNDI</title>
 
  {{--  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sticky-footer-navbar/"> --}}
 
@@ -68,7 +68,7 @@
   <header>
     <!-- Fixed navbar -->
     <nav class="navbar navbar-expand-lg navbar-light badge-warning">
-      <a class="navbar-brand" href="#"><h4> <i class="fas fa-house-user"></i> L.C.P.C</h4></a>
+      <a class="navbar-brand" href="#"><h4> <i class="fas fa-house-user"></i> UBUNTU</h4></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -114,6 +114,11 @@
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('rapport.index') }}" href="{{ route('rapport.index') }}"><i class="fa fa-bar-chart">Rapport</i></a>
           </li>
+        <li class="nav-item">
+            <a class="nav-link {{ setActiveRouter('articles.index') }}" href="{{ route('articles.index') }}"> <i class="fa fa-chain-broken">Site</i></a>
+          </li>
+
+
 
           <li class="nav-item">
             <a class="nav-link {{ setActiveRouter('users.index') }}" href="{{ route('users.index') }}"><i class="fa fa-user-md">Utilisateur</i></a>
@@ -160,7 +165,7 @@
 
   <footer class="footer mt-auto py-3">
     <div class="container text-center">
-      <span class="text-muted">A.E.J.T &copy;  <i>BURUNDI</i></span>
+      <span class="text-muted">AEJT  &copy;  <i>BURUNDI</i></span>
     </div>
   </footer>
 
@@ -173,6 +178,8 @@
  <script type="text/javascript" src="{{ asset('js/print.min.js') }}"></script>
 
  @stack('scripts')
+
+ @yield('javascript')
 
 </body>
 </html>

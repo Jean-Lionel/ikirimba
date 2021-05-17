@@ -43,20 +43,16 @@ class Person extends Model
     public static function getPersonneByCompteName($compteName) : Person 
     {
         $compte = Compte::where('name', '=',$compteName)->first();
-
         return $compte->membre ?? new Person;
-
     }
 
     //La methode permet de trouver les enfants d'un parent
-
     public function findChildren()
     {
         return self::where('code_parrent',$this->id)->get();
     }
 
     //Recuperer le parant
-
     public function parentDirect()
     {
          return self::where('id',$this->code_parrent)->first();
@@ -64,11 +60,9 @@ class Person extends Model
     }
 
     //Recuperer les freres
-
     public function simblings()
     {
         $parentId = $this->parentDirect() ? $this->parentDirect()->id : NULL ;
-
          return self::where('code_parrent',$parentId)->get();
     }
 
@@ -76,19 +70,14 @@ class Person extends Model
     //enfants Entre les freres ou dans les enfants
     
     public function findPersonWithMinChild()
-    {
-        
+    { 
          $frere = $this->simblings()->filter(function ($item) {
                 return $item->nombre_enfant_dirrect < 5;
              });
-
-
          $x = $frere->sortBy('nombre_enfant_dirrect');
-
         return $x->first();
 
         // return  $frere->min('nombre_enfant_dirrect');
     }
-
 
 }

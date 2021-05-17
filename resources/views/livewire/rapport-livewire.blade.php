@@ -181,7 +181,7 @@ body.modal-open {
               <i class="fa fa-share fa-5x"></i>
             </div>
 
-            <h6 class="text-uppercase">COMPTE DE AEJT</h6>
+            <h6 class="text-uppercase">ASSOCIATION 1</h6>
 
             <h5 class="d-flex justify-content-around">
               <i class="fab fa-amazon-pay"></i>
@@ -201,7 +201,7 @@ body.modal-open {
               <i class="fa fa-share fa-5x"></i>
             </div>
 
-            <h6 class="text-uppercase">COMPTE FCC</h6>
+            <h6 class="text-uppercase">ASSOCIATION 2</h6>
 
             <h5 class="d-flex justify-content-around">
               <i class="fab fa-amazon-pay"></i>
@@ -220,7 +220,7 @@ body.modal-open {
               <i class="fa fa-share fa-5x"></i>
             </div>
 
-            <h6 class="text-uppercase">COMPTE DESC ACTIONNAIRES</h6>
+            <h6 class="text-uppercase">ASSOCIATION 3/h6>
 
             <h5 class="d-flex justify-content-around">
               <i class="fab fa-amazon-pay"></i>

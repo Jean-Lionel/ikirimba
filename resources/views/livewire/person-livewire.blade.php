@@ -16,14 +16,6 @@
 		</div>
 		@endif
 	</div>
-
-	<div class="text-center">
-		<div wire:loading.delay>
-			<div class="spinner-border" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
-	</div>
 	 @can('is-admin')
 
 	<div class="row container mb-2">
@@ -305,5 +297,13 @@
 
 
 			@endif
+
+	<div class="text-center">
+		<div wire:loading.delay>
+			<div class="spinner-border" role="status">
+				<span class="sr-only">Loading...</span>
+			</div>
+		</div>
+	</div>
 
 		</div>

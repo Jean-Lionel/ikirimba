@@ -51,7 +51,7 @@ class PersonLivewire extends Component
         $this->confirming = $id;
     }
     
-    public function render()
+    public function render() 
     {
          // $this->$membreNonApprouver = collect();
         return view('livewire.person-livewire',
@@ -116,7 +116,7 @@ class PersonLivewire extends Component
     'first_name' => 'required',
     'last_name' => 'required',
     'telephone' => 'required',
-    'montant' => 'required|numeric|min:15000|max:15000',
+    'montant' => 'required|numeric|min:5000|max:10000000',
 ];
 
 private function validateParentCode(){
@@ -249,8 +249,6 @@ public function approuverEnregistrement($membre){
             throw new \Exception("Votre parrent n'est pas approuver Veuillez dommande les information", 1);
             
         }
-
-
         /**
          * LE PARTAGE CE FAIT EN 4 CATEGORIE
          *
@@ -270,49 +268,34 @@ public function approuverEnregistrement($membre){
          */
         
         // PARTAGE DES MONTANT SUR LES COMPTES
-        
         $montant_caisse =  $personne->montant;
-
         if($parent){
             //Ajout du montant sur le compte du parrant
             $m =  $montant_caisse / 5 ; // 3000 car c'est 1/5 de 15000
             $this->saveSharedMontant($personne, $parent, $m);
-
             $montant_caisse -= $m;
-
             $parent->compte->montant += $m;
             $parent->compte->save();
-
         }else{
-
             $aejt = StatiqueCompte::find(1);
-
             $m =  $montant_caisse / 5 ; // 3000 car c'est 1/5 de 15000
-
             $compte_membre = $personne->compte->name; 
             $this->checkStaticCompteOperation($aejt->name,$compte_membre, $aejt->montant);
-
             $montant_caisse -= $m;
              $aejt->montant +=  $m;
-
             $aejt->save();
-
         }
-
         // AJOUT DES MONTANT SUR LES COMPTES 
-        
         $sharedmontant =  $montant_caisse;
-
         $compte_membre = $personne->compte->name; 
-        
-
         $aejt = StatiqueCompte::find(1);
         $lcpc = StatiqueCompte::find(2);
         $actionnaire = StatiqueCompte::find(3);
        // $compte_adhesion = StatiqueCompte::find(4);
         //$aejt = StatiqueCompte::find(5);
-        
-        $aejt->montant += ($sharedmontant * 30 / 100);
+
+
+        $aejt->montant  += ($sharedmontant * 30 / 100);
 
         $this->checkStaticCompteOperation($aejt->name,$compte_membre, $aejt->montant);
 
@@ -341,8 +324,9 @@ public function approuverEnregistrement($membre){
         DB::commit();
 
     } catch (\Exception $e) {
+        dump($e);
         DB::rollback();
-        dump($e->getMessage());
+        
     }
 
     return back();

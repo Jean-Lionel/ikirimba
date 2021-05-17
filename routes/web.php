@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CollineController;
 use App\Http\Controllers\CommuneController;
 use App\Http\Controllers\ContributionController;
@@ -56,12 +57,10 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('member-list', [PersonController::class , 'memberListe'])->name('memberListe');
 	
 	Route::resource('contributions', ContributionController::class);
-	
-
-	
 
 	Route::resource('rapport', RapportController::class);
 	Route::resource('users', UserController::class);
 	Route::get('users-info', [UserController::class , 'info'])->name('users-info');
+	Route::resource('articles', ArticleController::class);
 
 });
